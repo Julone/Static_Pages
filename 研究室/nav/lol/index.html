@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Julone</title>
+<style type="text/css">
+body {
+	background-color: rgb(3,13,16);
+	z-index:-2;
+	overflow-x:hidden;
+}
+.font{
+	font-size: 17px;
+	color: #e1e1e1;
+	font-family: "微软雅黑";
+	position: absolute;
+	top: 4px;
+	z-index: 99;
+	left: 0;
+	}
+.s{
+    font-size: 12px;
+    color: #A7A7A7;
+    margin-top: -6px;
+}
+a{
+	color:#e1e1e1;
+	text-decoration:none;
+	border-style:none;
+	}
+td div a:hover{
+	color:#cdbe91;
+	text-decoration:none;
+	}
+td:not(:first-child):hover::before{
+content: '';
+    position: absolute;
+    margin-left: 6px;
+    margin-top: 47px;
+    height: 1px;
+    width: 89px;
+    background: linear-gradient(to left,transparent,#FBCB86,transparent);
+}
+img{
+	border-style:none;
+	}
+img.right{
+	width:170px;
+    position: fixed;
+    z-index: 10;
+	display: compact;
+    bottom: 15px;
+    right: 36px;
+	border:none;
+	border-color:rgba(231,191,151,1.00);
+	animation: my 1s infinite linear;
+	}
+.primary{
+		z-index:100;}
+.last{
+	z-index:1;}
+.sl{
+	position:relative;
+	z-index:99;
+	width:1300px;
+	margin:0 auto;
+	}
+.center{
+	margin:1200px;
+	width:0 auto;
+	}
+.goldline{
+	border:3px solid #4F3E1F;
+	}
+.cent{
+    position: absolute;
+    left: 50%;
+    top: 0;
+    margin-left: -940px;
+	}
+.wr{
+	position:relative;
+	min-width:1448px;
+	}
+.box{
+	width:730px;
+	height: auto;
+	}
+li.sb{
+	position:relative;
+	float:left;
+	padding:13px 30px;
+	list-style:none;
+	}
+h3{
+	bottom:10px;
+	margin:10px;
+	font-size:15px;
+	color: #4F3E1F;
+	font-family:'仿宋';
+	text-decoration:underline;
+	}
+.title{
+	font-family:'微软雅黑';
+	color:#F1DCA6;
+	text-align:center;
+	background-image:-webkit-gradient(linear, 0 0, 0 100%, from(rgba(255,232,184,1)), to(#866C33));
+	-webkit-background-clip:text;
+	-webkit-text-fill-color:transparent;
+	}
+	@keyframes my{
+		0%,100%{
+			transform:translate(0,5px);
+		}
+		50%
+		{
+			transform:translate(0,0px);
+		}
+	}
+</style>
+<link rel="icon" href="photo/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<div style="margin:0 auto;width:1200px">
+<table class="font" height="50" width="1000" align="center" style="position:relative;top:0;"><center>
+<tr><td height="70" colspan="2"><a href="http://lol.qq.com/v2/"><img class="logo" src="photo/public-spr.png"/></a></td>
+  <td width="134">
+  
+<div align="center">
+    <a href="http://lol.qq.com/v2/"><p>官网首页</p>
+    <p class="s">Home</p></a>
+  </div></td>
+  <td width="148"><div align="center">
+    <a href="http://lol.qq.com/web201310/info-heros.shtml"><p>游戏资料</p>
+    <p class="s">Game Info</p></a>
+  </div></td>
+  <td width="140"><div align="center">
+    <a href="http://daoju.qq.com/lol/"><p>商城/合作</p>
+    <p class="s">Store</p></a>
+  </div></td>
+  <td width="151"><div align="center">
+    <a href="http://lol.qq.com/v/"><p>视频中心</p>
+    <p class="s">Video</p></a>
+  </div></td>
+  <td width="151"><div align="center">
+    <a href="http://lpl.qq.com/"><p>赛事中心</p>
+    <p class="s">LPL</p></a>
+  </div></td>
+  <td width="151"><div align="center">
+    <a href="http://bbs.lol.qq.com/forum.php"><p>官方论坛</p>
+    <p class="s">Forum</p></a>
+  </div></td>
+  <td width="147"><div align="center">
+    <a href="http://lol.qq.com/web201310/personal.shtml"><p>个人中心</p>
+    <p class="s">Profile</p></a>
+  </div></td>
+ </tr></center>
+</table>
+</div>
+
+<div>
+<video class="cent" autoplay="autoplay" loop="loop" preload="auto">
+	<source src="bg.mp4">
+</video>
+</div>
+
+
+<table height="553px">
+</table>
+<div class="sl">
+<center>
+<marquee behavior="alternate" direction="down" height="110" scrollamount="1" loop="-1">
+<h1 class="title" style="font-size:60px">无双剑姬</h1>
+</marquee><br />
+
+
+
+<span class="title" style="font-family:'微软雅黑'; color:#F1DCA6; font-size:20px;font-style:italic;width:250px;">The Grand Duelist</span>
+</center>
+<center>
+<img src="photo/toup.png" width="1200""/></center>
+<br>
+
+
+
+<script src="js/jquery-1.8.3.min.js"></script>
+<link rel="stylesheet" href="../mobile/swiper.css">
+<script src="../mobile/swiper.min.js"></script>
+<style>
+.ti{
+	position: absolute;
+	top:0;
+	color: white
+}
+.power{
+	width: 380px;height:inherit;
+	    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    position:absolute;
+
+    z-index: 100;
+    background:rgba(4, 13, 15, 0.4)
+}
+.tinyintro{
+position: absolute;
+    color: white;
+    width: 358px;
+    z-index: 101;
+    left: 166px;
+    top: 495px;
+    color: rgb(196, 189, 167);
+    line-height: 19px;
+    text-align: left;
+    font-family: '微软雅黑';
+    letter-spacing: 1px;
+    font-size: 14px;
+    text-indent: 30px;
+}
+.tinyintro:before{
+    content: '';
+    position: absolute;
+    margin-left: 2px;
+    margin-top: -5px;
+    height: 1px;
+    width: 346px;
+    background: linear-gradient(to left,transparent,#FBCB86,transparent);
+}
+.tinytitle{
+	position: absolute;
+    color: white;
+    width: 364px;
+    z-index: 101;
+    left: 174px;
+    top:205px;
+        color: rgb(226, 220, 203);
+    line-height: 23px;
+    text-align: left;
+    font-family: '微软雅黑';
+    letter-spacing:3px;
+      display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: default;
+}
+.tinytitle span{
+	letter-spacing: 4px;
+}
+
+</style>
+<div class="tinytitle">
+	<img src="photo/fighter.png" width="50" height="50" alt="" style="filter:brightness(1.2);">
+	<span>菲奥娜·战士</span>
+</div>
+<div class="tinyintro">
+	<p>菲奥娜是全瓦洛兰最可怕的决斗家。她以雷厉风行、狡黠聪慧闻名于世，同样著名的还有她舞弄自己蓝钢佩剑的矫健。菲奥娜出生在德玛西亚王国的劳伦特家族，她从父亲的手中接管了家业，并在一场丑闻风波中将家族拯救于于灭亡的边缘。虽然劳伦特家威严不再，但菲奥娜却一直在不懈地努力，希望重振家族荣耀，让劳伦特这个名字重回德玛西亚名望贵族之列。
+	</p>
+</div>
+<div class="tinybtn">
+	<a class="frame-btn" href="history.html">
+	<span class="frame-btn__outline frame-btn__outline--tall">
+		<span class="frame-btn__line frame-btn__line--tall"></span>
+		<span class="frame-btn__line frame-btn__line--flat"></span>
+	</span>
+	<span class="frame-btn__outline frame-btn__outline--flat">
+		<span class="frame-btn__line frame-btn__line--tall"></span>
+		<span class="frame-btn__line frame-btn__line--flat"></span>
+	</span>
+	<span class="frame-btn__solid"></span>
+	<span class="frame-btn__text">了解更多</span>
+</a>
+</div>
+<style>
+.frame-btn {
+     margin-top: 50px;
+    line-height: 8px;
+    display: inline-block;
+    padding: 25px 30px;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-decoration: none;
+    position: absolute;
+    left: 283px;
+    z-index: 101;
+    top: 613px;
+    opacity: .7;
+        transform: scaleY(0.8);
+}
+.frame-btn__text {
+  color: #F1DCA6;
+  font-weight: bold;
+  text-transform: uppercase;
+  -webkit-transition: 300ms ease;
+  transition: 300ms ease;
+  position: relative;
+}
+.frame-btn:hover .frame-btn__text {
+  color: white;
+  opacity: 1
+}
+.frame-btn__solid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 10px;
+  background-color: #ab9d79;
+  width: calc(100% - (5px * 4));
+  height: calc(100% - (5px * 4));
+  -webkit-transform-origin: 50%;
+          transform-origin: 50%;
+  -webkit-transform: scale(0.85);
+          transform: scale(0.85);
+  opacity: 0;
+  -webkit-transition: 500ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: 500ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.frame-btn:hover .frame-btn__solid {
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.frame-btn__outline {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.frame-btn__outline--tall {
+  margin: 0 5px;
+  width: calc(100% - (5px * 2));
+  height: 100%;
+}
+.frame-btn__outline--flat {
+  margin: 5px 0;
+  height: calc(100% - (5px * 2));
+  width: 100%;
+}
+.frame-btn__line {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.frame-btn__line--tall:before, .frame-btn__line--tall:after {
+  height: 100%;
+  width: 1px;
+  top: 0;
+}
+.frame-btn:hover .frame-btn__outline--flat .frame-btn__line--tall:before, .frame-btn:hover .frame-btn__outline--flat .frame-btn__line--tall:after {
+  -webkit-transform: scaleY(0);
+          transform: scaleY(0);
+}
+.frame-btn:hover .frame-btn__outline--tall .frame-btn__line--tall:before, .frame-btn:hover .frame-btn__outline--tall .frame-btn__line--tall:after {
+  margin: 5px 0;
+  height: calc(100% - (5px * 2));
+}
+.frame-btn__line--tall:before {
+  left: 0;
+}
+.frame-btn__line--tall:after {
+  right: 0;
+}
+.frame-btn__line--flat:before, .frame-btn__line--flat:after {
+  width: 100%;
+  height: 1px;
+  left: 0;
+}
+.frame-btn:hover .frame-btn__outline--tall .frame-btn__line--flat:before, .frame-btn:hover .frame-btn__outline--tall .frame-btn__line--flat:after {
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+}
+.frame-btn:hover .frame-btn__outline--flat .frame-btn__line--flat:before, .frame-btn:hover .frame-btn__outline--flat .frame-btn__line--flat:after {
+  margin: 0 5px;
+  width: calc(100% - (5px * 2));
+}
+.frame-btn__line--flat:before {
+  top: 0;
+}
+.frame-btn__line--flat:after {
+  bottom: 0;
+}
+.frame-btn__line:before, .frame-btn__line:after {
+  content: '';
+  display: block;
+  position: absolute;
+  background-color: #F1DCA6;
+  -webkit-transition: 800ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: 800ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.frame-btn:hover .frame-btn__line:before, .frame-btn:hover .frame-btn__line:after {
+  -webkit-transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+</style>
+<script src="echarts.min.js"></script>
+<div class="swiper-container" style="width:1000px;height:550px;margin:0 auto;">
+<div class="power" name="power" id="power"></div>
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="photo/Fiora_6.jpg" width="1000" height="550" style="border-radius: 15px"/></div>
+      <div class="swiper-slide"><img src="photo/Fiora_2.png" width="1000" height="550" style="border-radius: 15px"/></div>
+      <div class="swiper-slide"><img src="photo/Fiora_1.jpg" width="1000" height="550" style="border-radius: 15px"/></div>
+      <div class="swiper-slide"><img src="photo/Fiora_3.jpg" width="1000" height="550" style="border-radius: 15px"/></div>
+      <div class="swiper-slide"><img src="photo/Fiora_4.jpg" width="1000" height="550" style="border-radius: 15px"/></div>
+      <div class="swiper-slide"><img src="photo/Fiora_5.jpg" width="1000" height="550" style="border-radius: 15px"/></div>
+    </div>
+  </div>
+    <script>
+        $(function(){
+             var swiper = new Swiper('.swiper-container', {
+      scrollbar: {
+        el: '.swiper-scrollbar',
+        hide: true,
+      },
+      loop:true,
+       effect : 'coverflow',
+    });
+        });
+    </script>
+<center><br />
+<script>
+ var myChart = echarts.init(document.getElementById('power'));
+ option = {
+    title: {
+        text: ''
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    radar: 
+        {
+            indicator: [
+             {text: '物理', max: 100},
+                {text: '魔法', max: 100},
+                {text: '生存', max: 100},
+                {text: '金钱', max: 100},
+                {text: '控制', max: 100},
+                {text: '难度', max: 100},
+            ],
+            center: ['50%','32%'],
+            radius: 75,
+            name: {
+            textStyle: {
+                color: '#E0D6B6',
+                borderRadius: 9,
+                fontSize : 14
+           }
+        },
+        },
+    series: 
+        {
+            type: 'radar',
+             tooltip: {
+                trigger: 'item'
+            },
+            symbol: 'none',
+     itemStyle: {
+     	normal: {
+     		areaStyle: {color: '#F1DCA6'},
+     		lineStyle: {color:"#F1DCA6"},
+     			}
+     		},
+            data: [
+                {
+                    value: [91,25,45,89,65,75],
+                    name: '英雄特性'
+                }
+            ]
+        ,animation:true,
+    }
+};
+        myChart.setOption(option,true);
+
+
+</script>
+  <img src="photo/bottom.png" width="1100" height="42"
+  />
+</center>
+
+<h2 class="title" align="center" style="font-family:'微软雅黑'; color: #F1DCA6; font-size:42px">技能介绍</h2>
+<center>
+  <img id="vt" src="photo/toup.png" width="1000" height="42">
+</center>
+<center>
+<div class="box">
+<ul class="abicon">
+    <li class="sb"><img class="goldline" src="photo/Fiora_P.png"></li>
+    <li class="sb"><img class="goldline" src="photo/FioraQ.png"></li>
+    <li class="sb"><img class="goldline" src="photo/FioraW.png"></li>
+    <li class="sb"><img class="goldline" src="photo/FioraE.png"></li>
+    <li class="sb"><img class="goldline" src="photo/FioraR.png"></li>
+</ul>
+<style>
+.abicon{
+	    height: 100px;
+    position: relative;
+        width: 660px;
+        padding-left: 0;
+        box-sizing: border-box;
+        z-index:100;
+            display: flex;
+    justify-content: space-between;
+}
+.abil{
+	    list-style: none;
+	    position: relative;
+    color:rgb(165, 165, 165);
+    font-family: '微软雅黑';
+    width: inherit;
+    padding-left: 0px;
+    width: 660px;
+    margin-top:-1px;
+}
+.abil li{
+    width: 660px;
+    text-align: left;
+    font-weight: 300;
+    /* padding: 30px; */
+    margin-top: -17px;
+    padding: 13px;
+       box-sizing: border-box;
+}
+.abil li p{
+	position: relative;
+	text-align: left;
+	    font-size: 21px;
+	    line-height: 10px;
+	    color:#F1DCA6;
+}
+.abil li p span{
+	font-size: 12px;
+	color: gray
+}
+.active{
+	border:1px solid #544626
+}
+.active-icon{
+	border:1px solid #544626;
+	background:#030d10;
+	border-top:3px solid #755409;
+	border-bottom: none;
+}
+*::selection{
+	background: none;
+};
+
+</style>
+<ol class="abil">
+	<li><p>决斗之舞&nbsp;&nbsp;<span>被动技能</span></p>菲奥娜对附近一名敌方英雄发起挑战，并发现其身上的一处破绽。如果她成功击中该破绽，她会得到额外奖励，并会发现下一处破绽。</li>
+
+	<li><p>破空斩&nbsp;&nbsp;<span>快捷键：Q</span></p>菲奥娜向一个方向进行突刺并刺击一个附近的敌人，造成70/80/90/100/110(+0.6)物理伤害并施加攻击特效。这个技能会优先攻击带有破绽且能够被此技能击杀的单位<br>如果这个技能命中了一个敌人，那么就会返还60%的冷却时间。<br><br>伤害：70/80/90/100/110<br>额外攻击力收益系数：0.95/1/1.05/1.1/1.15<br>冷却时间：16/14/12/10/8
+	<br>法力消耗：20/25/30/35/40
+</li>
+	<li><p>劳伦特心眼刀&nbsp;&nbsp;<span>快捷键：W</span></p>菲奥娜对即将到来的所有伤害、减益效果和控制效果进行招架，持续0.75秒，然后朝目标方向进行刺击。<br><br>刺击会对命中的第一个敌方英雄造成90/130/170/210/250(+)魔法伤害，并使目标的攻击速度和移动速度减少50%，持续1.5秒。<br><br>如果菲奥娜招架掉一个禁锢类的限制效果，那么她会对目标造成晕眩效果而不是减速效果。<br>伤害：90/130/170/210/250<br>冷却时间：20</li>
+
+	<li><p>夺命连刺&nbsp;&nbsp;<span>快捷键：E</span></p>菲奥娜的下两次攻击获得50%攻击速度加成。第一次攻击无法产生暴击，但会施加一个30%减速效果，持续1秒。第二次攻击必定会产生暴击，造成%伤害()。<br><br>
+	暴击伤害：50% -> 100%<br>冷却时间：13/11/9/7/5<br>法力消耗：40/45/50/55/60
+	</li>
+
+	<li><p>无双挑战&nbsp;&nbsp;<span>快捷键：R</span></p>菲奥娜标出目标英雄身上的全部四处破绽，最多可造成%最大生命值的真实伤害。此外，菲奥娜在敌方英雄附近时，会获得【决斗之舞】提供的移动速度加成(%)。<br><br>
+	如果菲奥娜在8秒内命中了全部四处破绽，或者在目标死前至少命中一处，那么菲奥娜和范围内的友军就会每秒回复80/110/140(+)生命值，持续2到5秒（命中的破绽数越多则持续时间越长）。<br><br>冷却时间：110/90/70<br>决斗移动速度加成：30/40/50%<br>每秒治疗量：80/110/140
+	</li>
+</ol>
+<script>
+$(function(){
+	"use strict";
+	var src = ["p.webm","q.webm","w.webm","e.webm","r.webm"]
+	$(".abicon li").click(function(event) {
+		let index = $(this).index();
+		$(".abicon li").removeClass('active-icon').eq(index).addClass('active-icon');
+		$(".abil li").hide().eq(index).show().addClass('active');
+		$("#abv").attr('src', src[index])
+	});
+	$(".abicon li").eq(0).click();
+	$("#abv")[0].volume = 0;
+	$(window).scroll(function(event) {
+		$("#abv")[0].volume = isSeen($("#abv"))?1:0;
+		if($(window).scrollTop()>2300)
+			$("#abv")[0].volume = 0;
+	});
+	function isSeen(obj){
+		if(obj.offset().top <= $(window).height() + $(window).scrollTop())
+			return true;
+	}
+})
+</script>
+</div>
+<div>
+</div>
+</center>
+<center>
+<img src="photo/small.png" alt=""><br><br>
+
+<video id="abv" src="" width="680" height="360"  draggable="false" autoplay="autoplay" loop="loop">
+</video>
+<br>
+</center>
+<br />
+
+<center>
+<img id="vb" src="photo/bottom.png" width="1000"></center>
+<h2 class="title" style="font-family:'微软雅黑'; color: #F1DCA6; font-size:42px">天赋点法</h2>
+<center><img src="photo/toup.png" width="1000">
+<br><br>
+<img  class="goldline" src="photo/20170321183500.png" align="middle" width="800"><br><br><br></center>
+<center><img src="photo/bottom.png" width="1000"></center>
+<br><br>
+<h2 class="title" align="center" style="font-family:'微软雅黑'; color: #F1DCA6; font-size:42px">模型设计</h2>
+<center>
+<img src="photo/toup.png" width="1000"></center>
+<center><br><br>
+<style>
+.goldline{
+	transition: all ease .51s;
+}
+.goldline:hover{
+	transform: scale(1.05);
+	filter: brightness(1.2);
+}
+
+</style>
+<img class="goldline" src="photo/model1.jpg" width="650" /><br><br><br>
+<img class="goldline" src="photo/model2.jpg" width="650" /><br><br><br>
+<img class="goldline" src="photo/model3.jpg" width="650"/><br><br><br>
+<img class="goldline" src="photo/model4.jpg" width="650"/><br><br><br>
+<img class="goldline" src="photo/model5.jpg" width="650"/>
+<br />
+<br><br><center><img src="photo/toup.png" width="1000"></center>
+</center>
+
+<h2 class="title" align="center" style="font-family:'微软雅黑'; color:#f1dca6; font-size:px">
+“我取你性命皆因荣誉之故。虽你并无荣誉可言，依然理当受死。”</h2>
+<br />
+<center><a href="history.html">
+<img src="photo/fioraicon.png" width="144" height="144" align="center" /></a>
+</center>
+<center>br />
+<a href="history.html">
+<h3>阅读人物传记</h3></a><br />
+
+</center>
+<center>
+<img src="photo/bottom.png" width="1000"></center><br />
+<br />
+
+<center><a href="javascript:window.scrollTo( 0, 0 );">
+<div style"width:300px;height:100px">
+<marquee scrollamount="3" behavior="scroll" direction="up">
+<center>
+<img src="photo/arrow-down-sprite.png" width="30">
+</center>
+</marquee>
+</div></a>
+</center>
+
+<center>
+<p style="font-style:italic;color:grey;font-size:10px;font-family:'微软雅黑'">-Design by Julone-</p>
+</center>
+
+<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=183371456&site=qq&menu=yes">
+<img class="right" src="photo/galio-stands.png">
+</a>
+</div>
+
+
+</body>
+</html>

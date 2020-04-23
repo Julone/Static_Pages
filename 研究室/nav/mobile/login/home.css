@@ -1,0 +1,381 @@
+* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+			.title {
+				font-size: 28px;
+			}
+			.container {
+				margin: 0;
+				padding: 0;
+			}
+			/*3V空间广告*/
+			center{
+				display: none
+			}
+			body {
+				background-color: #eff6fd;
+				font-family: Helvetica Neue, Helvetica, Arial, SCREEN GP Sans SC, sans-serif;
+			}
+			p {
+				padding: 0px;
+			}
+			.head {
+				background: rgba(255,255,255,1);
+				padding-bottom: 2px;
+				border-radius: 0 0 5px 5px;
+				box-shadow: 0px 4px 12px 0px rgba(132, 132, 132, 0.25);
+				border-bottom: 1px solid 1px solid rgba(48, 112, 228, 0.31);
+			}
+			.main-title {
+				font-size: 18px;
+				line-height: 42px;
+				letter-spacing: 3px;
+			}
+			.border {
+				box-shadow: 0 1px 2px rgba(0, 0, 0, .1), 0 18px 20px -10px rgba(0, 0, 0, .03), 0 18px 20px -10px rgba(0, 0, 0, .03), 0 10px 20px -10px rgba(0, 0, 0, .03);
+				border-radius: .4rem;
+				background-color: white;
+				white-space: nowrap;
+				padding-top: 10px;
+				margin: 15px auto;
+			}
+			.container-fluid {
+				padding-right: 15px;
+				padding-left: 15px;
+				margin-right: auto;
+				margin-left: auto;
+			}
+			.btn-shop {
+				box-shadow: 0 1px 2px rgba(0, 0, 0, .1), 0 18px 20px -10px rgba(0, 0, 0, .03), 0 18px 20px -10px rgba(0, 0, 0, .03), 0 10px 20px -10px rgba(0, 0, 0, .03);
+			/*	padding: 0;
+				margin: 0;*/
+				background: #fff;
+				/*height: 78px;*/
+				margin-top: 10px;
+				border-radius: .7rem;
+			}
+			.btn-shop div {
+				padding: 0;
+				overflow: hidden;
+				font-size: .1rem;
+				/*margin-left: 5px;*/
+				/*margin-right: 5px;*/
+				white-space: nowrap;
+				text-align: center;
+				margin-top: -12px;
+			}
+			.btn-shop .col-xs-2 {
+				width: 20%;
+			}
+			.btn-shop div p {
+				margin-top: -10px;
+			}
+			.btn-shop div:last-child {
+				border-right: none;
+			}
+			.btn-shop div img {
+				margin-top: 10px;
+				transform: scale(.6);
+				transition: all ease .11s;
+				width: 100%;
+			}
+			.btn-shop div img:active {
+				filter: brightness(1.1);
+			}
+			.items {
+				margin-top: 15px;
+				padding: 0px;
+			}
+			ul {
+				list-style: none;
+				margin-bottom: 0;
+			}
+			.items li {
+				height: 50px;
+				line-height: 48px;
+				padding-left: 20px;
+				font-size: 15px;
+				letter-spacing: 2px;
+				border-bottom: 1px solid rgba(0, 0, 0, .1);
+				overflow: hidden;
+				transition: all ease .04s;
+			}
+			.items li:last-child {
+				border: none;
+			}
+			.items li::before {
+				content: ">";
+				position: absolute;
+				right: 4rem;
+				font-weight: 400;
+			}
+			.items li:active {
+				background: linear-gradient(rgba(72, 182, 255, 0.1), rgba(72, 182, 255, 0.05));
+				color: #517BB5;
+				border-radius: 0.4rem;
+			}
+			.userhead {
+				margin-left: 20px;
+				box-shadow: 0px 0px 0px 2px #3f51b547;
+			}
+			#myCarousel {
+				margin-top: 15px;
+				padding: 0 2px 2px 0;
+			}
+			.carousel-inner {
+				border-radius: 1rem;
+				display: flex;
+				justify-content: center;
+				box-shadow: 0 1px 2px rgba(0, 0, 0, .1), 0 18px 20px -10px rgba(0, 0, 0, .03), 0 18px 20px -10px rgba(0, 0, 0, .03), 0 10px 20px -10px rgba(0, 0, 0, .03);
+			}
+			.carousel-inner div img {
+				/*background-size: 100% 100%;*/
+			}
+			.carousel-control.right,
+			.carousel-control.left {
+				background-image: none;
+				background: none;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 7%;
+			}
+			.carousel-indicators {
+				position: absolute;
+				bottom: -10px;
+				transform: scale(.6);
+			}
+			.menu {
+				width: 100%;
+				height: auto;
+				position: fixed;
+				top: 38px;
+				display: none;
+				white-space: nowrap;
+				z-index: 200;
+			}
+			.menu ul li {
+				list-style: none;
+				border-bottom: #E9E9E9 1px dashed;
+				/*display: block;*/
+				font-size: 0.9rem;
+				margin: 0 0;
+				height: 5rem;
+				line-height: 5rem;
+				text-align: left;
+						background: rgba(255,255,255,1);
+				/*width: 100%;*/
+			}
+			.menu ul li:last-child {
+				border-bottom: none;
+				margin-bottom: 5px;
+				border-radius: 0 0 1rem 1rem;
+			}
+			.menu ul li a {
+				color: #3b3b3b;
+				font-size: 1.3rem;
+				margin-left: 26px;
+				height: 5rem;
+				width: 80vw;
+				display: block;
+				text-decoration: none;
+				letter-spacing: 0.3rem;
+			}
+			.menu-logo {
+				transform: scale(0.6);
+				top: 12px;
+				left: 12px;
+				position: absolute;
+				width: 35px;
+				height: 5px;
+				transition: all ease 1s;
+				background: #999999;
+				cursor: pointer;
+				border-radius: 10px;
+				z-index: 50;
+			}
+			.menu-logo::before {
+				content: '';
+				width: 35px;
+				height: 5px;
+				position: absolute;
+				transition: all ease 1s;
+				background: #999999;
+				top: 13px;
+				cursor: pointer;
+				border-radius: 10px;
+				transition: all ease 1s;
+			}
+			.menu-logo::after {
+				content: '';
+				width: 35px;
+				height: 5px;
+				position: absolute;
+				transition: all ease 1s;
+				background: #999999;
+				top: 26px;
+				cursor: pointer;
+				border-radius: 10px;
+			}
+			.menu-logo-active {
+				transform: rotate(45deg) scale(.7) translate(15px, 0px);
+			}
+			.menu-logo-active::before {
+				transform: rotate(-360deg);
+				opacity: 0
+			}
+			.menu-logo-active::after {
+				transform: rotate(450deg) scale(1) translate(-26px, 0px);
+			}
+			.search-icon {
+				top: 0px;
+				right: 0px;
+				height: 45px;
+				position: absolute;
+				width: 45px;
+				transform: scale(0.6);
+				opacity: 0.6;
+			}
+			.search {
+				position: absolute;
+				top: 1.5px;
+				width: 70%;
+				height: 42px;
+				left: 16vw;
+				border: none;
+				outline: none;
+				letter-spacing: 2px;
+				background: white;
+				/*transition: all linear 1s;*/
+				display: none;
+			}
+			.fixed {
+				position: fixed;
+				background: rgba(255,255,255,1);
+				top: 0;
+				width: 100%;
+				z-index: 1900;
+			}
+			.back-top {
+			    position: fixed;
+    z-index: 999;
+    right: 25px;
+    bottom: 78px;
+    width: 40px;
+    height: 40px;
+    background: rgba(131, 204, 208, 0.7);
+    display: none;
+    border-radius: .4rem;
+    line-height: 40px;
+    color: white;
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
+			}
+							.hot {
+					    height: auto;
+    display: flex;
+    padding: 10px;
+    margin-top: 5px;
+    padding-bottom: 16px;
+				}
+				.hot img{
+					width: 120px;
+					height: 100px;
+				}
+			.hot-right {
+    position: relative;
+    width: 65%;
+    position: relative;
+    height: auto;
+    margin-left: 14px;
+}
+				.shop-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 10px;
+        font-size: 17px;
+    margin-top: 9px;
+}
+		.hot-right .shop-info{
+			font-size:12px;
+			width: 95%;
+			  white-space:normal;
+         word-break:break-all;
+         word-wrap:break-word; 
+         margin-top: 4px;
+         color:#B8B8B8;
+		}
+		.hot-right .price{
+			    margin-top: 3px;
+		}
+		.hot-right .price span:nth-child(1){
+			color:#E84B4B;
+			font-size: 18px;
+		}
+		.hot-right .sold{
+			    margin-left: 10%;
+		}
+		.hot-title{
+			background-image:-webkit-linear-gradient(left, rgb(255, 42, 42), rgb(241, 57, 210));
+			-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+			font-size: 18px;
+			margin-top: 5px;
+			font-weight: 600;
+		}
+		.hot-title::before{
+    content: "";
+    width: 100px;
+    background: linear-gradient(to right,rgba(39,167,133,0),rgb(241, 57, 210));
+    height: 1px;
+    position: absolute;
+    margin-left: -102px;
+    margin-top: 12px;
+		}
+		.hot-title::after{
+			    content: "";
+    width: 100px;
+    background: linear-gradient(to left,rgba(39,167,133,0),rgb(255, 42, 42));
+    height: 1px;
+    position: absolute;
+   margin-right: -102px;
+    margin-top: 12px;
+		}
+		.love-life{
+			background-image: -webkit-linear-gradient(left, rgb(0, 194, 171), rgb(62, 148, 255));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+		}
+		.love-life::before{
+			background: linear-gradient(to right,rgba(39,167,133,0),rgb(62, 148, 255));
+		}
+		.love-life::after{
+			background: linear-gradient(to left,rgba(39,167,133,0),rgb(0, 194, 171));
+		}
+		.carousel-inner div a img{
+						border-radius: 10px;
+					}
+		.swiper-slide{
+			display: flex;
+		}
+		
+		.hot-bullet{
+		width: 8px;
+  display: inline-block;
+  border-radius: 3px;
+background: #e69494;
+  opacity: 0.5;
+			height: 4px;
+				margin-left: 7px;
+		}
+
+		.hot-bullet-active{
+			
+			background: #ff2e2e;
+			height: 4px;
+		
+	}

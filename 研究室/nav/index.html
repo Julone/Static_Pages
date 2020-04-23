@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>JULONE</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit">
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no"/>
+	<script src="https://cdn.bootcss.com/jquery/1.8.0/jquery-1.8.0.min.js"></script>
+	<script src="https://cdn.bootcss.com/Swiper/4.3.0/js/swiper.min.js"></script>
+	<link href="https://cdn.bootcss.com/Swiper/4.3.0/css/swiper.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="./index.css">
+	<link rel="stylesheet" href="./mobile.css">
+	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
+	<script src="julone.js"></script>
+</head>
+
+<body ontouchstart>
+	<img src="img/dna.gif" style="display:none" alt="">
+	<div class="header">
+		<div class="nav">
+			<a href="/">
+				<div class="navLeft">
+					<img src="./img/logo.png"  height="34" alt="">
+				</div>
+			</a>
+			<div class="navCenter">
+				<div class="navList">
+					<div class="navListUp">Julone</div>
+					<div class="navListDown">INFO</div>
+				</div>
+			</div>
+			<a href="/comment">
+				<div class="navRight">
+					<img src="./img/write.png"  height="26" alt="">
+				</div>
+			</a>
+		</div>
+	</div>
+	<!-- Swiper -->
+	<div class="swiper-container">
+		<div class="parallax-bg" data-swiper-parallax="-23%"></div>
+		<div class="swiper-wrapper index-swiper">
+			<div class="swiper-slide">
+			</div>
+			<div class="swiper-slide">
+				<div class="mainTitle" data-swiper-parallax="-100" data-swiper-parallax-opacity="0.7">
+					<h1>HELLO, FRIENDS</h1>
+				</div>
+				<div class="mainContent" data-swiper-parallax="0">
+					<p data-swiper-parallax="-300" data-swiper-parallax-opacity="0.5">这个页面已停止维护</p>
+					<p data-swiper-parallax="-700" data-swiper-parallax-opacity="0.4">现在只作为往期作品的入口页面</p>
+					 <p data-swiper-parallax="-1100" data-swiper-parallax-opacity="0.7">
+						不提供任何实际作用
+					</p> 
+					<p data-swiper-parallax="-1500" data-swiper-parallax-opacity="0.7">
+						This page which I no longer update 
+					</p>
+					<p data-swiper-parallax="-1800" data-swiper-parallax-opacity="0.7">
+						Now just for past works entry
+					</p>
+					<div class="mainBtm">
+						<a href="/">
+							<input type="button" value='Go Home' >
+						</a>
+					</div>
+				</div>
+				
+			</div>
+			<div class="swiper-slide">
+			</div>
+		</div>
+	</div>
+	</div>
+	<script>
+		var swiper = new Swiper('.swiper-container', {
+			mousewheelControl: true,
+			parallax: true,
+			speed: 600,
+			initialSlide: 1,
+			keyboardControl: true,
+			grabCursor : true,
+		});
+	</script>
+	<div class="sound_wrapper">
+	</div>
+
+	<div class="content">
+		<div>
+			<h1>个人主页
+				<span>Index</span>
+			</h1>
+			<p>最花里胡哨板块</p>
+			<a href="./index/index.html"></a>
+		</div>
+
+		<div>
+			<h1>成绩查询
+				<span>Score</span>
+			</h1>
+			<p>泉州师范教务处板块</p>
+			<a href="./index/score2.html"></a>
+		</div>
+
+		<div>
+			<h1>龙渊阅读
+				<span>Reader</span>
+			</h1>
+			<p>文章分享板块</p>
+			<a href="./longyuan/index.html"></a>
+		</div>
+
+		<div>
+			<h1>英雄联盟
+				<span>League</span>
+			</h1>
+			<p>英雄联盟剑姬板块</p>
+			<a href="./lol/index.html"></a>
+		</div>
+
+		<div>
+			<h1>移动商城
+				<span>Store</span>
+			</h1>
+			<p>移动端商城板块</p>
+			<a href="./mobile/index.html"></a>
+		</div>
+		
+	</div>
+	<div class="about">
+		<div class="intro">
+			<div class="myHead">
+				<img src="img/me.jpg" width="90" height="90" alt="">
+			</div>
+			<div class="myCon">
+				<button>
+					<i></i>julone@qq.com</button>
+				<button>
+					<i></i>177-20-7171-54</button>
+			</div>
+			<div class="myBlog">
+				<a href="https://weibo.com/u/5646096222">
+					<div>
+						<img src="./img/weibo.png" alt="">
+					</div>
+				</a>
+				<a href="#" onclick="toast('微信号:JuloneL',10000);">
+					<div>
+						<img src="./img/wechat.png" alt="">
+					</div>
+				</a>
+				<a href="#" onclick="toast('QQ号:183371456',10000);">
+					<div>
+						<img src="./img/qq.png" alt="">
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="zhezhao"></div>
+	<div class="sound_wrapper"></div>
+	<script>
+		$(function () {
+	
+		if(mobile){
+			
+			$(".content div a").click(function(event){
+				var index = $(this).parent('div').index();
+				event.preventDefault();
+				var cards = [];
+				var url = $(this).attr('href');
+			 	
+				var sib = $(this).parent('div').siblings('div');
+				for(let j in sib){
+					cards.push(sib.eq(j));
+				}
+				cards.push($(this).parent('div'));
+				for(let i in cards){
+					setTimeout(function(){
+						cards[i].addClass('clicked')
+					},200 * i);
+				}
+				setTimeout(function(){
+					$("body,html").animate({scrollTop:0},400);
+					$(".content").animate({top:- 100 * index+"px"},100 * index,'linear')
+				},800)
+				setTimeout(function(){
+					window.location.href = url ;
+				},1200)
+			})
+			$(document).scroll(function(event){
+				$(".content").css('transform', `translate3d(0,${$(document).scrollTop() / 4.3}px,0)`);
+			})
+		}
+			$(".content div").click(function(event) {
+				Sound("hover");
+			})
+
+			$(".footer a").click(function (event) {
+				location.reload();
+			});
+
+			$(".mainBtm input").click(function(){
+				var pw = prompt("请输入管理员密码","");
+				if(pw!=null && pw!=""){
+					$.ajax({url: 'admin.php', type: 'POST', data: {password:pw}})
+					.done(function(data) {var str = data; if(str=="error"){toast("密码错误,请重新输入"); }else{toast("密码正确,正在跳转..."); setTimeout(function(){window.location.href = str; },100); } })
+				}
+			});
+		})
+	</script>
+	<div class="footer">
+		Copyright&copy
+		<a>
+			JULONE
+		</a>
+		<br>All Rights Reserved
+	</div>
+</body>
+</html>

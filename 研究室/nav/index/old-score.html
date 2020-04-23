@@ -1,0 +1,272 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=0.65,user-scalable=no">
+		<title>成绩</title>
+		<link rel="shortcut icon" href="分数.png" type="image/png">
+		<link rel="stylesheet" href="score.css">
+		<link rel="stylesheet" href="loading.css">
+		<script src="jquery.min.js"></script>
+		<script src="layer.js"></script>
+		<link rel="stylesheet" href="nav.css">
+		<script type="text/javascript">
+			$(window).load(function () {
+				layer.msg('若长时间没有响应,请切换内网模式', {
+					offset: '75vh',
+					zIndex: '214748360012',
+					area: '300px',
+					anim: 2,
+					time: 1000,
+					skin: 'layerskinwhite'
+				});
+				setTimeout(load, 800);
+			});
+			$(function () {
+				$("#loader").click(load);
+				var timerloading = setInterval(function () {
+					if ($("body").hasClass('loaded')) {
+						setTimeout(function () {
+							$("#menu-cb").click()
+						}, 500)
+						clearInterval(timerloading)
+					}
+				}, 100)
+				navInform('rgba(39,167,133,.80)'); //导航标记
+				$(document).keydown(function (e) {
+					if (e.keyCode == 123) {
+						return false;
+					}
+				}).bind('contextmenu', function () {
+					return false;
+				});
+				$("#loader").click(load);
+				var timerLoad = setInterval(function () {
+					if ($("body").hasClass('loaded')) {
+						setTimeout(function () {
+							pushletter();
+						}, 500)
+						if ($(".texts").val() != '') {
+							$(".texts").prev('label').addClass('active');
+							$(".x").show(500);
+						}
+						clearInterval(timerLoad);
+					}
+				}, 100)
+				// 本地存储账号密码
+				var storage = window.localStorage;
+				if (storage.getItem('user') == null) {
+					storage.setItem("user", "default");
+					storage.setItem("pass", "");
+					$(".x").hide();
+					$(".btn").css("animation-play-state", 'paused');
+				} else if (storage.getItem("user") != "default") {
+					$("#username").val(storage.getItem("user")).prev('label').addClass('active');
+					$("#password").val(storage.getItem("pass")).prev('label').addClass('active');
+					$(".x").show(500)
+					$(".btn").css("animation-play-state", 'playing');
+				}
+				$('.texts').focus(function () {
+					$(this).prev('label').addClass('active');
+				}).blur(function () {
+					if ($(this).val() == '')
+						$(this).prev('label').removeClass('active')
+				})
+				$('#username').keyup(function () {
+					$('.x').show(500);
+				})
+				$(".x").click(function () {
+					$(".texts").each(function (i) {
+						$(this).val('').prev('label').removeClass('active')
+					})
+					storage.removeItem("user");
+					$(this).hide(500)
+				})
+
+				$("input[name='button1']").click(function (event) {
+					var that = $(this);
+					var regExp = /[1][6-9][1-9]\d{6}$/;
+					var regPw = /.{5,20}$/;
+					if(regExp.test($("#username").val()) && regPw.test($("#password").val())){
+						storage.setItem("user", $("#username").val());
+						storage.setItem("pass", $("#password").val());
+					}else{
+						that.addClass('warning').val('为什么不能登录,你心里没点B数?');
+						var timer = setTimeout(function () {
+							that.removeClass('warning').val('登录');
+						}, 1200)
+						return false;
+					}
+				});
+				$(".design").toggle(function(){
+						$("form").attr('action', 'http://jwc.qztc.edu.cn/academic/j_acegi_security_check');
+					layer.msg(
+						'已切换至内网模式,请使用 <a href="iReader-pc.exe" style="color:#9de7df">iReader</a> 进行访问!', {
+							offset: '60vh',
+							anim: 2,
+							time: 7000,
+							skin: 'layerskinblack'
+						})
+						$(".design").text('正在使用内网模式');
+						},function () {
+					$("form").attr('action', 'http://210.34.124.7/cgi-bin/nph-ireader.pl/ireader/00/http/jwc.qztc.edu.cn/academic/j_acegi_security_check');
+					layer.msg(
+						'已切换至外网模式,直接登录即可', {
+							offset: '60vh',
+							anim: 2,
+							time: 5000,
+							skin: 'layerskinblack'
+						});
+					$(".design").text('正在使用外网模式');
+				});
+				$(".design").text('正在使用外网模式');
+				$("i span:eq(1)").hide();
+				$("i").toggle(function () {
+					$("i span:eq(0)").hide();
+					$("i span:eq(1)").show();
+					$('#password').prop('type', 'text');
+				}, function () {
+					$("i span:eq(0)").show();
+					$("i span:eq(1)").hide();
+					$('#password').prop('type', 'password');
+				})
+				//footer
+				var str = 'Copyright © 1997 - 2018 Julone All Rights Reserved';
+				var letter = [];
+				for (var i = 0; i < str.length; i++)
+					letter[i] = str.substring(i, i + 1);
+				function pushletter() {
+					var j = 0;
+					$(".footer").text('');
+					var timer = setInterval(function () {
+						$(".footer").append(letter[j]);
+						j++;
+					}, Math.floor((Math.random() * 100) + 100));
+				}
+				$("#footer").click(function (event) {
+					if ($("#footer").text().length == letter.length)
+						pushletter();
+				});
+				if(mobile){
+					$('.nav').hide()
+				}
+			
+			})
+		</script>
+	</head>
+	<body ondragstart="return false;" style="overflow: hidden">
+		<!-- 加载动画 -->
+		<div id="loader-wrapper">
+			<div id="loader" style="background: #7dc5af;cursor: pointer;"></div>
+			<div class="loader-section section-left" style="background: rgb(107, 178, 168)"></div>
+			<div class="loader-section section-right" style="background: rgb(107, 178, 168)"></div>
+		</div>
+		<style>
+			.vpn{
+				position: absolute;
+				right: 40px;
+				top: 50px;
+				display: block;
+				width: 100px;
+				height: 50px;
+				z-index: 10000;
+				cursor: pointer;
+				line-height: 50px;
+				font-size: 23px;
+				letter-spacing: 3px;
+				font-weight: 700px;
+				white-space: nowrap;
+				font-family: '微软雅黑';
+			}
+			.vpn:hover {
+  background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEi%0D%0AIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhs%0D%0AaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB3aWR0%0D%0AaD0iMzkwcHgiIGhlaWdodD0iNTBweCIgdmlld0JveD0iMCAwIDM5MCA1MCIgZW5hYmxlLWJhY2tn%0D%0Acm91bmQ9Im5ldyAwIDAgMzkwIDUwIiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPHBhdGggZmlsbD0i%0D%0Abm9uZSIgc3Ryb2tlPSIjZDk0ZjVjIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLW1pdGVybGlt%0D%0AaXQ9IjEwIiBkPSJNMCw0Ny41ODVjMCwwLDk3LjUsMCwxMzAsMAoJYzEzLjc1LDAsMjguNzQtMzgu%0D%0ANzc4LDQ2LjE2OC0xOS40MTZDMTkyLjY2OSw0Ni41LDI0My42MDMsNDcuNTg1LDI2MCw0Ny41ODVj%0D%0AMzEuODIxLDAsMTMwLDAsMTMwLDAiLz4KPC9zdmc+Cg==");
+  animation: line 2s;
+color: #d94f5c;
+}
+@-webkit-keyframes line {
+  0% {
+    background-position-x: 390px;
+  }}
+		</style>
+		<a href="vpn.html">
+		<div class="vpn">
+			VPN模式
+		</div>
+		</a>
+		<!-- 导航 -->
+		<nav class="nav">
+			<input type="checkbox" class="nav__cb" id="menu-cb">
+			<div class="nav__content">
+				<ul class="nav__items">
+					<li class="nav__item">
+						<a href="index.html">
+							<span class="nav__item-text">首页</span>
+						</a>
+					</li>
+					<li class="nav__item">
+						<a href="http://julone.qxg1.top/score.html">
+							<span class="nav__item-text">成绩</span>
+						</a>
+					</li>
+					<li class="nav__item">
+						<a href="page.html">
+							<span class="nav__item-text">战意</span>
+						</a>
+					</li>
+					<li class="nav__item">
+						<a href="game.html">
+							<span class="nav__item-text">游戏</span>
+						</a>
+					</li>
+					<!-- 	<li class="nav__item">
+							<a href="game2.html">
+									<span class="nav__item-text">关于</span>
+							</a>
+					</li> -->
+				</ul>
+			</div>
+			<label class="nav__btn" for="menu-cb"></label>
+		</nav>
+		<link rel="stylesheet" href="nav.css">
+		<link rel="stylesheet" href="nav.css">
+		<!-- 成绩表单 -->
+		<div class="main">
+			<form action="http://210.34.124.7/cgi-bin/nph-ireader.pl/ireader/00/http/jwc.qztc.edu.cn/academic/j_acegi_security_check=3bjsessionid=3dF2E4ABE9375DE19A67859C9149331C5A.TA4" name="form1" method="post">
+				<div class="wrap first">
+					<div class="title">
+						<div class="bb"></div>
+					</div>
+					<div class="user">
+						<label for="username">请输入学生号</label>
+						<input class="texts" id="username" type="text" name="j_username" autocomplete="off">
+						<div class="x">×</div>
+					</div>
+					<div class="password">
+						<label for="password">请输入密码</label>
+						<input class="texts" id="password" type="password" name="j_password" autocomplete="off">
+						<i id="eye">
+						<span>&#xe624;</span>
+						<span>&#xe625;</span>
+						</i>
+					</div>
+					<div class="login">
+						<input class="btn" name="button1" type="submit" value="登录" formtarget="_blank" style="font-family:'微软雅黑';color:rgba(255,255,255,1.00)">
+					</div>
+					<img src="bottomline.png" style="z-index:1000;width:320px;margin:0 auto; position:absolute;top:85%;left:15%;">
+					<img src="man.png" width="60px" style="position:absolute;top:68.8%;right:66%;z-index:1000;">
+				</div>
+				<div class="design">点此切换线路</div>
+				<span class="school">[泉州师范学院]</span>
+				<!-- footer -->
+				<div class="footer" id="footer"></div>
+			</form>
+		</div>
+
+		<!-- 鼠标特效画板与脚本 -->
+		<div id="test" style="position:fixed;top:0px;z-index:10;"></div>
+		<script src="sketch.min.js"></script>
+		<script src="mouseeffects.js"></script>
+		<!-- 背景动态 -->
+		<script src="scoreBg.js"></script>
+	</body>
+</html>

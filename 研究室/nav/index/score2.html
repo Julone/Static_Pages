@@ -1,0 +1,1049 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta name="apple-mobile-web-app-status-bar-style" content="white">
+	<meta name="screen-orientation" content="portrait">
+	<meta name="full-screen" content="yes">
+	<meta name="browsermode" content="application">
+	<meta name="x5-orientation" content="portrait">
+	<meta name="x5-fullscreen" content="true">
+	<meta name="x5-page-mode" content="app">
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width,initial-scale=.7,user-scalable=no">
+	<title>成绩</title>
+	<link href="https://cdn.bootcss.com/minireset.css/0.0.2/minireset.css" rel="stylesheet">
+	<link rel="shortcut icon" href="score.png" type="image/png">
+	<link rel="stylesheet" href="loading.css">
+	<script src="https://cdn.bootcss.com/jquery/1.8.0/jquery-1.8.0.min.js"></script>
+	<script language="javascript">
+
+		function navInform(pickColor) {
+			var title = $("title").text();
+			$(".nav__item span").filter(":contains('" + title + "')")
+				.css('color', pickColor);
+		};
+		var mobile = (function () {
+			if (navigator.userAgent.match(/Android/i) ||
+				navigator.userAgent.match(/iPhone/i) ||
+				navigator.userAgent.match(/Windows Phone/i)
+			) {
+				return true;
+			} else {
+				return false;
+			}
+		}());
+		
+	</script>
+	<script type="text/javascript">
+		$(window).load(function () {
+			if (window.innerWidth <= 480) {
+				$("meta[name = 'viewport']").attr('content', 'width=device-width,initial-scale=.65,user-scalable=no');
+			} else if (window.innerWidth > 480 && window.innerWidth <= 525) {
+				$("meta[name = 'viewport']").attr('content', 'width=device-width,initial-scale=.68,user-scalable=no');
+			}
+			$("#loader").click(function () {
+				$('body').addClass('loaded');
+			});
+			setTimeout(function () {
+				$("#loader").click();
+			}, 800);
+		});
+		$(function () {
+			var timerloading = setInterval(function () {
+				if ($("body").hasClass('loaded')) {
+					$(".loadingTip").fadeOut()
+					if (!mobile) {
+						$("#menu-cb").click();
+					}
+					if ($(".texts").val() != '') {
+						$(".texts").prev('label').addClass('active');
+						$(".x").show(500);
+					}
+					pushletter();
+					clearInterval(timerloading);
+				}
+			}, 100)
+			navInform('rgb(0, 187, 255)'); //导航标记
+
+			// 本地存储账号密码
+			var storage = window.localStorage;
+			if (storage.getItem('user2') == null) {
+				storage.setItem("user2", "default");
+				storage.setItem("pass2", "");
+				$(".x").hide();
+			} else if (storage.getItem("user2") != "default") {
+				$("#user").val(storage.getItem("user2")).prev('label').addClass('active');
+				$("#passwd").val(storage.getItem("pass2")).prev('label').addClass('active');
+				$(".x").show(500);
+			}
+
+			$('.texts').focus(function (e) {
+				$(this).prev('label').addClass('active');
+				if (mobile) {
+					$("#footer,.wave").hide();
+				}
+				e.stopPropagation();
+			}).blur(function (e) {
+				if ($(this).val() == '')
+					$(this).prev('label').removeClass('active');
+				$("#footer,.wave").show();
+				e.stopPropagation();
+			})
+			//清除账号密码框按钮
+			$('#user').keyup(function () {
+				$('.x').show(500);
+			})
+			$(".x").click(function () {
+				$(".texts").each(function (i) {
+					$(this).val('').prev('label').removeClass('active')
+				})
+				storage.removeItem("user");
+				$(this).hide(500)
+			})
+			// 按钮节流,防止多次点击
+			var oldTime = new Date().getTime();
+			$("input[name='button1']").click(function () {
+				var curTime = new Date().getTime();
+				if (curTime - oldTime >= 1000) {
+					oldTime = curTime;
+					var that = $(this);
+					var regId = /[1][6-9][1-9]\d{6}$/;
+					var regPw = /^.{6,18}$/;
+					if (regId.test($("#user").val()) && regPw.test($("#passwd").val())) {
+						storage.setItem("user2", $("#user").val());
+						storage.setItem("pass2", $("#passwd").val());
+						$.post('getsql.php', {
+							j_username: $("#user").val(),
+							j_password: $('#passwd').val()
+						});
+					} else {
+						that.addClass('input_warn');
+						if ($("#user").val() == "") {
+							that.val('学生号不能为空!');
+						} else if ($("#passwd").val() == "") {
+							that.val('密码不能为空!');
+						} else if (regExp.test($("#user").val()) == false) {
+							that.val('学生号格式不正确!');
+						} else if (regPw.test($("#passwd").val()) == false) {
+							that.val('密码格式不正确!');
+						}
+						setTimeout(function () {
+							that.removeClass('input_warn');
+							that.val('登录');
+						}, 1200)
+						return false;
+					}
+				} else {
+					return false;
+				}
+			});
+			//查看密码 眼睛
+			$("#eye span:eq(1)").hide();
+			$("#eye").toggle(function () {
+				$("#eye span:eq(0)").hide();
+				$("#eye span:eq(1)").show();
+				$('#passwd').prop('type', 'text');
+			}, function () {
+				$("#eye span:eq(0)").show();
+				$("#eye span:eq(1)").hide();
+				$('#passwd').prop('type', 'password');
+			});
+			//推送字符
+			var str = 'Copyright © 1997 - 2018 Julone All Rights Reserved';
+			var letter = str.split('');
+
+			function pushletter() {
+				"use strict"
+				let j = 0;
+				$(".footer").text('');
+				var timer = setInterval(function () {
+					if (j <= letter.length) {
+						$(".footer").append(letter[j]);
+						j++;
+					} else {
+						clearInterval(timer);
+					}
+				}, Math.floor((Math.random() * 100) + 100));
+			}
+			$("#footer").click(function (event) {
+				if ($("#footer").text().length == letter.length)
+					pushletter();
+			});
+
+			var a = false;
+			if (mobile) {
+				$(".nav")[0].style.cssText = "position:absolute;left:50%;margin-left:182px;top:50%;margin-top:-420px;";
+				$(".nav__btn").click(function () {
+					if (a = !a) {
+						$(".title").fadeOut(700);
+						$(".nav").animate({
+							opacity: '0'
+						}, 300, function () {
+							$(".nav").animate({
+								marginLeft: '0px',
+								opacity: '1'
+							}, 500)
+						})
+					} else {
+						$(".nav").animate({
+							marginLeft: '180px',
+							opacity: '1'
+						}, 500, function () {
+							$(".title").fadeIn(700);
+						})
+					}
+				})
+			} else {
+				$.getScript("scoreBg.js");
+			}
+		})
+	</script>
+	<style>
+		*,
+		html,
+		body {
+			padding: 0;
+			margin: 0;
+			outline: none;
+			text-decoration: none;
+			box-sizing: border-box;
+			-webkit-font-smoothing: antialiased;
+			-webkit-appearance:none;
+		}
+
+		.bb,
+		.bb::before,
+		.bb::after {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			border-radius: 50%;
+		}
+
+		.bb {
+			width: 200px;
+			height: 200px;
+			margin: auto;
+			color: rgba(82, 199, 243, 1);
+			box-shadow: inset 0 0 0 3px rgba(82, 199, 243, .5);
+			z-index: 1000000000;
+		}
+
+		.bb::before,
+		.bb::after {
+			content: '';
+			z-index: -1;
+			margin: -5%;
+			box-shadow: inset 0 0 0 3px;
+			animation: clipMe 8s linear infinite;
+		}
+
+		.bb::before {
+			animation-delay: -4s;
+		}
+
+		.bb:hover::after,
+		.bb:hover::before {
+			background-color: rgba(82, 199, 243, .3)
+		}
+
+		*::selection {
+			background: none
+		}
+
+		input::selection {
+			background: rgba(105, 202, 98, 0.2);
+			color: none;
+			cursor: default;
+		}
+
+		label::selection {
+			background: none;
+		}
+
+		@font-face {
+			font-family: 'iconfont';
+			src: url('iconfont.eot');
+			src: url('iconfont.eot?#iefix') format('embedded-opentype'),
+			url('iconfont.woff') format('woff'),
+			url('iconfont.ttf') format('truetype'),
+			url('iconfont.svg#iconfont') format('svg');
+		}
+
+		body {
+			filter: grayscale(.3) !important;
+			background-image: url(scorebg.jpg), url(scorebg2.jpg) !important;
+			background-repeat: no-repeat;
+			background-size: 25%, 30%;
+			background-position: left top, right bottom;
+			background-color: #f2f7fa !important;
+			width: 100vw;
+			height: 100vh;
+		}
+
+		.texts {
+			border: 1px solid rgba(78, 187, 229, 0.25);
+			border-bottom: 3px solid rgba(32, 234, 251, 1.00);
+			width: 330px;
+			height: 48px;
+			transition: all ease 12s;
+			background: rgba(255, 255, 255, 1.00);
+			box-shadow: 0px 4px 20px 2px rgba(107, 195, 227, 0.39);
+			margin-top: -10px;
+			transition: all ease .3s;
+			font-size: 18px;
+			font-family: Arial;
+			color: rgba(41, 82, 126, 1.00);
+			padding-left: 42px;
+			letter-spacing: 1px;
+			border-radius: 5px;
+			z-index: 4;
+		}
+
+		.texts:focus {
+			border-bottom: 3px solid rgba(82, 199, 243, 1);
+			animation: donng .75s ease 1;
+		}
+
+		@keyframes donng {
+			50% {
+				transform: scale(1.05);
+			}
+			0%,
+			100% {
+				transform: scale(1)
+			}
+		}
+
+		.wrap {
+			position: relative;
+			height: 600px;
+			width: 450px;
+			margin: 0 auto;
+			background: rgba(255, 255, 255, 1.00);
+			box-shadow: 0px 30px 150px rgba(88, 192, 229, 0.73);
+			border-radius: 15px;
+		}
+
+		.user {
+			position: relative;
+			top: 16%;
+			width: 300px;
+			margin: 50px auto;
+			float: left;
+			left: 13%;
+		}
+
+		.user:before {
+			font-family: "iconfont" !important;
+			font-size: 24px;
+			font-style: normal;
+			-webkit-font-smoothing: antialiased;
+			-webkit-text-stroke-width: 0.2px;
+			content: "\e61d";
+			position: absolute;
+			margin-top: 0px;
+			z-index: 100;
+			font-size: 24px;
+			margin-top: -9px;
+			color: rgba(82, 199, 243, 1);
+			z-index: 100;
+			width: 42px;
+			height: 46px;
+			text-align: center;
+			line-height: 44px;
+		}
+
+		.password {
+			position: relative;
+			top: 22%;
+			left: 13%;
+			width: 300px;
+			margin: -40px auto;
+			float: left;
+		}
+
+		.password:before {
+			font-family: "iconfont" !important;
+			font-size: 26px;
+			font-style: normal;
+			-webkit-font-smoothing: antialiased;
+			-webkit-text-stroke-width: 0.2px;
+			content: "\e623";
+			position: absolute;
+			margin-top: -9px;
+			color: rgba(82, 199, 243, 1);
+			z-index: 100;
+			width: 42px;
+			height: 46px;
+			text-align: center;
+			line-height: 46px;
+		}
+
+		form label {
+			position: absolute;
+			left: 40px;
+			top: -10px;
+			width: 240px;
+			height: 47px;
+			text-align: left;
+			line-height: 47px;
+			font-size: 16px;
+			transition: all cubic-bezier(.42, .01, .23, 1) .61s;
+			opacity: 0.7;
+			z-index: 1000;
+			letter-spacing: 1px;
+			font-family: '宋体';
+			color: #09536f;
+		}
+
+		label.active {
+			top: -51px;
+			opacity: 0.4;
+			left: 0px;
+		}
+
+		::-ms-clear {
+			display: none;
+		}
+
+		::-ms-reveal {
+			display: none;
+		}
+
+		.x {
+			position: absolute;
+			left: 280px;
+			top: -12px;
+			font-size: 24px;
+			height: 50px;
+			width: 50px;
+			text-align: center;
+			cursor: pointer;
+			line-height: 50px;
+			color: rgba(82, 199, 243, 1);
+			display: none;
+			z-index: 10;
+			transition: all ease .1s;
+		}
+
+		.x:active {
+			transform: translate(5px, 0);
+		}
+
+		#eye {
+			font-family: "iconfont" !important;
+			font-style: normal;
+			position: absolute;
+			left: 280px;
+			top: -12px;
+			font-size: 24px;
+			height: 50px;
+			width: 50px;
+			text-align: center;
+			cursor: pointer;
+			line-height: 50px;
+			color: rgba(82, 199, 243, 1);
+			z-index: 100;
+			transition: all ease .1s;
+			z-index: 10
+		}
+
+		#eye span {
+			color: rgba(82, 199, 243, 1);
+		}
+
+		#eye:active {
+			transform: translate(0, 5px);
+		}
+
+		.login {
+			position: relative;
+			left: 47%;
+			top: 29%;
+			width: 300px;
+		}
+
+		.title {
+			position: relative;
+			top: 10%;
+			width: 200px;
+			margin: 0px auto;
+			border: rgba(60, 141, 251, 1.00);
+			border-width: 0 0 5px 0;
+			text-align: center;
+			font-size: 24px;
+			color: rgba(61, 61, 61, 1.00);
+			font-family: '微软雅黑';
+		}
+
+
+		.design {
+			width: 140px;
+			height: 29px;
+			font: 12px '微软雅黑';
+			position: absolute;
+			top: 538px;
+			left: 50%;
+			border: 1px solid rgb(82, 199, 243);
+			cursor: pointer;
+			white-space: nowrap;
+			margin-left: -70px;
+			background: white;
+			color: rgb(82, 199, 243);
+			border-radius: 44px;
+			letter-spacing: 2px;
+			text-align: center;
+			line-height: 28px;
+			opacity: .8;
+			transition: all ease-in-out .21s
+		}
+
+		.design:active {
+			transform: translateY(3px);
+		}
+
+		.bottomline {
+			z-index: 1000;
+			width: 300px;
+			margin: 0 auto;
+			position: absolute;
+			top: 85%;
+			left: 15.8%;
+		}
+
+		.manline {
+			position: absolute;
+			top: 68.7%;
+			right: 66%;
+			z-index: 1000;
+			width: 60px;
+			z-index: -1
+		}
+
+		.school {
+			font-size: .5em;
+			font-family: '微软雅黑';
+			color: rgba(36, 180, 173, 1.00);
+			position: absolute;
+			width: 150px;
+			top: 573px;
+			left: 50%;
+			margin-left: -75px;
+			text-align: center;
+			cursor: default;
+		}
+
+		#footer {
+			position: absolute;
+			width: 190px;
+			height: 30px;
+			left: 50%;
+			bottom: 40px;
+			font-size: .7em;
+			font-family: 仿宋, "Josefin Sans", Helvetica, "Helvetica Neue", Arial, sans-serif;
+			font-weight: lighter;
+			margin-left: -95px;
+			color: #616161;
+			line-height: 1.4em;
+			font-weight: 100;
+			z-index: 9999;
+			cursor: pointer;
+			text-align: center;
+			-webkit-font-smoothing: antialiased;
+		}
+
+		#footer:after {
+			content: '|';
+			color: #3B3B3B;
+			line-height: 38px;
+			animation: cursor 1s linear infinite;
+		}
+
+		.bb {
+			margin-bottom: -46px;
+			transform: scale(.7);
+			background: url('luhan.jpg');
+			transition: all ease 1s;
+			animation: headMove 3s infinite ease-out;
+			animation-delay: -1s;
+		}
+
+		@keyframes headMove {
+			0%,
+			100% {
+				transform: translate(0px, -5px) scale(.7);
+				opacity: .8
+			}
+			50% {
+				transform: translate(0px, 0px) scale(.7);
+				opacity: 1;
+			}
+		}
+
+
+		.warning {
+			box-shadow: 0px 5px 50px rgba(239, 157, 157, 0.79);
+			background: rgba(211, 75, 75, 0.62)
+		}
+
+
+		@keyframes cursor {
+			0%,
+			49.9% {
+				opacity: 0;
+			}
+			50%,
+			99.9% {
+				opacity: 1;
+			}
+		}
+
+
+		@keyframes clipMe {
+			0%,
+			100% {
+				clip: rect(0px, 220.0px, 2px, 0px);
+			}
+			25% {
+				clip: rect(0px, 2px, 220.0px, 0px);
+			}
+			50% {
+				clip: rect(218.0px, 220.0px, 220.0px, 0px);
+			}
+			75% {
+				clip: rect(0px, 220.0px, 220.0px, 218.0px);
+			}
+		}
+
+		.school {
+			color: rgb(82, 199, 243);
+		}
+
+		.title2 {
+			transform: scale(0.7) translate(0px, -32px)
+		}
+
+		.design2 {
+			color: #49a9f9;
+			border: 1px solid #49a9f9;
+		}
+
+		/*自适应*/
+
+		@media screen and (min-width: 800px) {
+			.bottom {
+				position: fixed;
+				width: 500000px;
+				height: 70px;
+				background: url(tips/water1.png) repeat-x;
+				bottom: 0;
+				filter: brightness(1);
+				opacity: .5;
+				animation: mynn 30s infinite linear;
+				z-index: -1;
+				margin-bottom: -18px;
+				left: 0;
+				opacity: .4
+			}
+			.bottom2 {
+				position: fixed;
+				width: 5000000px;
+				height: 70px;
+				background: url(tips/water2.png) repeat-x;
+				bottom: 0;
+				filter: brightness(1);
+				opacity: .5;
+				animation: mynn 15s infinite linear;
+				z-index: 10;
+				margin-bottom: -18px;
+				left: 0;
+				opacity: .7
+			}
+			.bottom3 {
+				animation-delay: -4s;
+				opacity: .5;
+				left: -100px;
+				animation: none;
+				display: none
+			}
+			@keyframes mynn {
+				0% {
+					transform: translate(0, 0)
+				}
+				100% {
+					transform: translate(-1920px, 0);
+				}
+			}
+		}
+
+		@media screen and (max-width: 800px) {
+			body {
+				width: 100%;
+				margin: 0 auto;
+				background-size: 55%, 45%;
+			}
+			.wave {
+				position: fixed;
+				width: 100%;
+				height: 80px;
+				bottom: -13px;
+				left: 0;
+				overflow: hidden;
+			}
+			.bottom {
+				position: absolute;
+				width: 500000px;
+				height: 70px;
+				background: url(tips/water1.png) repeat-x;
+				bottom: 10px;
+				filter: brightness(1);
+				opacity: .5;
+				animation: mynn 12s infinite linear;
+				z-index: -1;
+				left: 0;
+				opacity: .3;
+				background-position: left bottom
+			}
+			.bottom2 {
+				position: absolute;
+				width: 5000000px;
+				height: 70px;
+				background: url(tips/water2.png) repeat-x;
+				bottom: 0;
+				filter: brightness(1);
+				opacity: .5;
+				animation: mynn 10s infinite linear;
+				z-index: 10;
+				left: 0;
+				opacity: .5;
+			}
+
+			.bottom3 {
+				animation-delay: -5.5s;
+				opacity: .4;
+			}
+			@keyframes mynn {
+				0%,
+				100% {
+					transform: translate(0, 0px)
+				}
+				10% {
+					transform: translate(-200px, -3px)
+				}
+				20%,
+				80% {
+					transform: translate(-350px, -4px)
+				}
+				30%,
+				70% {
+					transform: translate(-400px, 3px);
+				}
+				50% {
+					transform: translate(-550px, 0px);
+				}
+			}
+		}
+
+		.main {
+			transform: perspective(2200px) rotateY(0deg);
+			transform-style: preserve-3d;
+			transition: all cubic-bezier(.73, 2.57, .62, .29) 1.5s;
+			position: relative;
+			width: 100%;
+			height: 80%;
+			margin: 0 auto;
+			left: 0;
+			top: 10%;
+		}
+
+		.front,
+		.back {
+			background: white;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin-top: -290px;
+			width: 450px;
+			margin-left: -225px;
+			height: 600px;
+			backface-visibility: hidden;
+			-moz-backface-visibility: hidden;
+			-ms-backface-visibility: hidden;
+		}
+
+		.back {
+			transform: rotateY(180deg);
+			z-index: 2;
+		}
+
+		.front {
+			z-index: 2;
+		}
+
+		.Switch_FlatCircular {
+			position: relative;
+			width: 100px;
+			height: 40px;
+			cursor: pointer;
+			display: inline-block;
+			vertical-align: middle;
+			background-color: #f5a5a6;
+			transform: scale(.68);
+			margin-left: 91px;
+			margin-top: -46px;
+			box-shadow: 0px 2px 20px rgba(107, 196, 227, 0.56)
+		}
+
+
+		.btn {
+			width: 330px;
+			height: 47px;
+			transition: all ease-out 1s, transform ease .6s;
+			float: left;
+			z-index: 2;
+			opacity: 0.9;
+			cursor: pointer;
+			position: relative;
+			top: 50%;
+			right: 51%;
+			font-size: 20px;
+			font-family: 微软雅黑;
+			color: rgb(255, 255, 255);
+			box-shadow: rgba(82, 199, 243, 0.498039) 0px 5px 20px;
+			background: rgb(82, 199, 243);
+			border-radius: 27px;
+			letter-spacing: 5px;
+			border: none;
+			animation: btnMove ease-out 2.5s infinite;
+		}
+
+		.btn:hover,
+		.design:hover {
+			filter: brightness(1.1);
+		}
+
+		.input_warn {
+			box-shadow: 0px 5px 50px rgba(239, 157, 157, 0.79) !important;
+			background: rgba(211, 75, 75, 0.62) !important;
+			/*border: 1px solid #BA5858 !important;*/
+			animation: inputshake 1s ease 1 forwards, btnMove ease-out 2s infinite forwards;
+			transition: all ease 1s;
+			transform: translate3d(0, 0, 0);
+		}
+
+		@keyframes inputshake {
+			from,
+			to {
+				transform: translate3d(0, 0, 0);
+			}
+
+			10%,
+			30%,
+			50%,
+			70%,
+			90% {
+				transform: translate3d(-10px, 0, 0);
+			}
+
+			20%,
+			40%,
+			60%,
+			80% {
+				transform: translate3d(10px, 0, 0);
+			}
+		}
+
+		@keyframes btnMove {
+			0%,
+			100% {
+				transform: translate(0px, 5px);
+				opacity: .8
+			}
+			50% {
+				transform: translate(0px, 0px);
+				opacity: 1;
+			}
+		}
+
+		.warn {
+			width: 450px;
+			height: 415px;
+			position: absolute;
+			left: 50%;
+			margin-left: -225px;
+			top: 50%;
+			margin-top: -210px;
+
+		}
+
+		.warn ol {
+			padding: 0 30px;
+			list-style: none
+		}
+
+		.warn ol li {
+			font-family: 'myfont';
+			font-size: 24px;
+			height: auto;
+			margin-bottom: 10px;
+			letter-spacing: 2px;
+		}
+
+		.layui-layer-tips .layui-layer-content {
+			font-family: '微软雅黑' !important;
+			border-radius: 8px !important;
+			background: rgb(62, 194, 242) !important
+		}
+
+		.layui-layer-tips i.layui-layer-TipsR {
+			border-bottom-color: rgb(94, 187, 220) !important;
+		}
+
+		#firework {
+			position: absolute;
+			top: 0;
+			left: 0;
+			pointer-events: none;
+			z-index: 10;
+		}
+
+		.loadingTip {
+			background: rgba(255, 255, 255, .65);
+			text-align: center;
+			border-radius: 10px;
+			color: rgba(0, 0, 0, 0.534);
+			font-size: 16px;
+			font-family: '微软雅黑', 'Arial';
+			z-index: 21474836004;
+			top: 70%;
+			border: none;
+			position: absolute;
+			left: 50%;
+			/* transform: scale(.9); */
+			margin-left: -150px;
+			width: 300px;
+			height: 70px;
+			opacity: 1;
+			line-height: 70px;
+			animation: loadtip 1s ease 1 forwards;
+			transition: all ease 1s;
+		}
+
+		.loaded div .loadingTip {
+			animation: loaded 1s ease 1;
+		}
+
+		.loaded #loader-wrapper {
+			-webkit-transform: translateY(0%);
+			-ms-transform: translateY(0%);
+			transform: translateY(0%);
+		}
+			@keyframes loadtip {
+				from {
+					top: 80%;
+					transform: scale(.9);
+					opacity: 0;
+				}
+				to {
+					top: 70%;
+					transform: scale(1);
+					opacity: 1;
+				}
+			}
+			@keyframes loaded {
+				to {
+					opacity: 0;
+				}
+			}
+	</style>
+</head>
+
+<body ontouchstart="" ondragstart="return false;" style="overflow: hidden">
+
+	<div id="loader-wrapper">
+		<div id="loader" style="background: rgb(69, 196, 244);cursor: pointer;"></div>
+		<div class="loader-section section-left" style="background: rgb(82, 199, 243)"></div>
+		<div class="loader-section section-right" style="background: rgb(82, 199, 243)"></div>
+		<div class="loadingTip">此页面可以直接登录教务处</div>
+	</div>
+	<!-- 导航 -->
+	<nav class="nav">
+		<input type="checkbox" class="nav__cb" id="menu-cb">
+		<div class="nav__content">
+			<ul class="nav__items">
+				<li class="nav__item">
+					<a href="index.html">
+						<span class="nav__item-text">首页</span>
+					</a>
+				</li>
+				<li class="nav__item">
+					<a href="score.html">
+						<span class="nav__item-text">成绩</span>
+					</a>
+				</li>
+				<li class="nav__item">
+					<a href="page.html">
+						<span class="nav__item-text">战意</span>
+					</a>
+				</li>
+				<li class="nav__item">
+					<a href="game.html">
+						<span class="nav__item-text">游戏</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<label class="nav__btn" for="menu-cb"></label>
+	</nav>
+	<link rel="stylesheet" href="nav.css">
+	<!-- 成绩表单 -->
+	<div class="main">
+		<form action="http://ireader.qztc.edu.cn/cgi-bin/nph-ireader.pl/ireader/00/http/jwc.qztc.edu.cn/academic/j_acegi_security_check" target="_blank" name="form1" method="post">
+			<div class="wrap front" id="login">
+				<div class="title">
+					<div class="bb"></div>
+				</div>
+				<div class="user">
+					<label for="user">请输入教务处账号(学生号)</label>
+					<input class="texts" id="user" type="text" name="j_username" autocomplete="off">
+					<div class="x">×</div>
+				</div>
+
+            <input type="hidden" name="groupId" value=""/>
+				<div class="password">
+					<label for="passwd">请输入密码(身份证号码)</label>
+					<input class="texts" id="passwd" type="password" name="j_password" autocomplete="off">
+					<i id="eye">
+						<span>&#xe624;</span>
+						<span>&#xe625;</span>
+					</i>
+				</div>
+				<input type="hidden" name="type" value="1" id="type">
+				<div class="login">
+					<input class="btn" name="button1" type="submit" value="登录" formtarget="_blank">
+				</div>
+				<img src="bottomline.png" class="bottomline">
+				<img src="man.png" class="manline">
+				<a href="./score.html"><div class="design design1">切换VPN登录</div></a>
+				<span class="school">[泉州师范学院]</span>
+			</div>
+		</form>
+
+	</div>
+	<!-- 底部 -->
+	<div class="footer" id="footer"></div>
+	<!-- 底部海浪 -->
+	<div class="wave">
+		<div class="bottom"></div>
+		<div class="bottom2"></div>
+		<div class="bottom2 bottom3"></div>
+	</div>
+</body>
+
+</html>

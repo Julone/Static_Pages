@@ -1,0 +1,44 @@
+.h-audio{
+    position:absolute;
+    width:70px;height:70px;
+    top:10px;right:4vw;
+    z-index:999;
+    padding-right:40px;
+}
+.h-audio::after{
+    content: 'Music';
+    position:relative;
+    top: 30px;
+    left: 60px;
+    color: rgba(255,255,255,0.7);
+}
+.h-audio2{
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    top: 60px;
+    right: 50px;
+    z-index: 999;
+    padding-right: 40px;
+}
+.h-audio2:after{
+    content: 'Music';
+    position:relative;
+    top: 30px;
+    left: 60px;
+    color: rgba(255,255,255,0.7);
+}
+.h-audio,.h-audio2 a{
+    color: white;
+}
+.h-wave{position:absolute;bottom:9px;left:0;right:0;border-bottom:10px solid transparent;text-align:center;overflow:hidden;color:#fff}
+.h-wave>i{display:inline-block;width:3px;margin-right:3px;border-top:5px solid;-webkit-transform-origin:bottom center;transform-origin:bottom center;vertical-align:middle}
+.h-wave.active>i:nth-of-type(1){border-top-width:5px;-webkit-animation:waveAudio .66s ease-in infinite;animation:waveAudio .66s ease-in infinite}
+.h-wave.active>i:nth-of-type(2){border-top-width:20px;-webkit-animation:waveAudio 1s .2s ease-out infinite;animation:waveAudio 1s .2s ease-out infinite}
+.h-wave.active>i:nth-of-type(3){border-top-width:10px;-webkit-animation:waveAudio .72s linear infinite;animation:waveAudio .72s linear infinite}
+.h-wave.active>i:nth-of-type(4){border-top-width:24px;-webkit-animation:waveAudio .63s .3s ease-in-out infinite;animation:waveAudio .63s .3s ease-in-out infinite}
+@keyframes waveAudio{
+    0%{border-top-width:2px}
+    50%{border-top-width:24px}
+    100%{border-top-width:3px}
+}

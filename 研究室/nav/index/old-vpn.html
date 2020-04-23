@@ -1,0 +1,533 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=0.66,user-scalable=no">
+		<title>iReader在线登陆</title>
+		<style>
+			*{padding: 0;
+				margin:0;}
+		</style>
+		<link rel="shortcut icon" href="分数.png" type="image/png">
+		<link rel="stylesheet" href="score.css">
+		<link rel="stylesheet" href="loading.css">
+		<script src="jquery.min.js"></script>
+		<script src="layer.js"></script>
+		<link rel="stylesheet" href="nav.css">
+		<script type="text/javascript">
+			$(window).load(function () {
+				layer.msg('正在前往VPN隧道', {
+					offset: '75vh',
+					zIndex: '214748360012',
+					area: '300px',
+					anim: 2,
+					time: 1000,
+					skin: 'layerskinwhite'
+				});
+				setTimeout(load, 800);
+			});
+			$(function () {
+				$("#loader").click(load);
+				var timerloading = setInterval(function () {
+					if ($("body").hasClass('loaded')) {
+						setTimeout(function () {
+							if(!mobile)
+							$("#menu-cb").click()
+						}, 500)
+						clearInterval(timerloading)
+					}
+				}, 100)
+				navInform('rgba(39,167,133,.80)'); //导航标记
+			
+				$("#loader").click(load);
+				var timerLoad = setInterval(function () {
+					if ($("body").hasClass('loaded')) {
+						setTimeout(function () {
+							pushletter();
+						}, 500)
+						if ($(".texts").val() != '') {
+							$(".texts").prev('label').addClass('active');
+							$(".x").show(500);
+						}
+						clearInterval(timerLoad);
+					}
+				}, 100)
+				// 本地存储账号密码
+				var storage = window.localStorage;
+				if (storage.getItem('user') == null) {
+					storage.setItem("user", "default");
+					storage.setItem("pass", "");
+					$(".x").hide();
+					$(".btn").css("animation-play-state", 'paused');
+				} else if (storage.getItem("user") != "default") {
+					$("#user").val(storage.getItem("user")).prev('label').addClass('active');
+					$("#passwd").val(storage.getItem("pass")).prev('label').addClass('active');
+					$(".x").show(500)
+					$(".btn").css("animation-play-state", 'playing');
+				}
+				$('.texts').focus(function () {
+					$(this).prev('label').addClass('active');
+				}).blur(function () {
+					if ($(this).val() == '')
+						$(this).prev('label').removeClass('active')
+				})
+				$('#user').keyup(function () {
+					$('.x').show(500);
+				})
+				$(".x").click(function () {
+					$(".texts").each(function (i) {
+						$(this).val('').prev('label').removeClass('active')
+					})
+					storage.removeItem("user");
+					$(this).hide(500)
+				})
+
+				$("input[name='button1']").click(function (event) {
+					var that = $(this);
+					var regExp = /[1][6-9][1-9]\d{6}$/;
+					var regPw = /.{5,20}$/;
+					if(regExp.test($("#user").val()) && regPw.test($("#passwd").val())){
+						storage.setItem("user", $("#user").val());
+						storage.setItem("pass", $("#passwd").val());
+					}else{
+						that.css({
+							boxShadow: '0px 5px 50px rgba(239, 157, 157, 0.79)',
+							background: 'rgba(211, 75, 75, 0.62)'
+						});
+						that.val('账号或密码不完整!');
+						var timer = setTimeout(function () {
+							that.css({
+								boxShadow: '0px 5px 50px rgba(159,255,241,1.00)',
+								background: 'rgb(82, 199, 243)'
+							});
+							that.val('登录');
+						}, 1200)
+						return false;
+					}
+				});
+				$("i span:eq(1)").hide();
+				$("i").toggle(function () {
+					$("i span:eq(0)").hide();
+					$("i span:eq(1)").show();
+					$('#passwd').prop('type', 'text');
+				}, function () {
+					$("i span:eq(0)").show();
+					$("i span:eq(1)").hide();
+					$('#passwd').prop('type', 'password');
+				});
+				//footer
+				var str = 'Copyright © 1997 - 2018 Julone All Rights Reserved';
+				var letter = [];
+				for (var i = 0; i < str.length; i++)
+					letter[i] = str.substring(i, i + 1);
+				function pushletter() {
+					var j = 0;
+					$(".footer2").text('');
+					var timer = setInterval(function () {
+						var lett = letter[j];
+						$(".footer2").append(lett);
+						j++;
+					}, Math.floor((Math.random() * 100) + 100));
+				}
+				$("#footer2").click(function (event) {
+					if ($("#footer2").text().length == letter.length)
+						pushletter();
+				});
+				$(".closed").css('transition', 'all ease 1s');
+				$(".closed").click(function(event) {
+					$(this).css('transform', 'rotate(360deg)');
+
+					$(".tips").animate({
+						'top': '150%',
+						'opacity':'0'
+						},500)
+				})
+				var a = false
+				if(mobile){
+					$(".nav")[0].style.cssText = "position:absolute;left:50%;margin-left:180px;top:50%;margin-top:-480px;";
+					$(".nav__btn").click(function() {
+						if(a=!a){
+							$(".nav").animate({marginLeft:'-400px'}, 1000,function() {
+									$(".nav").animate({marginLeft:'0px'}, 500)
+								
+							})
+						}else{
+							$(".nav").animate({marginLeft:'180px'}, 500)
+						}
+						
+					})
+				};
+				
+			})
+		</script>
+	</head>
+	<style>
+	body{
+		filter: grayscale(.3);
+	}
+	.btn:hover,.design:hover{
+		filter: brightness(1.05);
+	}
+	</style>
+	<body ondragstart="return false;" style="overflow: hidden">
+		<!-- 加载动画 -->
+		<div id="loader-wrapper">
+			<div id="loader" style="background: rgb(69, 196, 244);cursor: pointer;"></div>
+			<div class="loader-section section-left" style="background: rgb(82, 199, 243)"></div>
+			<div class="loader-section section-right" style="background: rgb(82, 199, 243)"></div>
+		</div>
+		<!-- 导航 -->
+		<nav class="nav">
+			<input type="checkbox" class="nav__cb" id="menu-cb">
+			<div class="nav__content">
+				<ul class="nav__items">
+					<li class="nav__item">
+						<a href="index.html">
+							<span class="nav__item-text">首页</span>
+						</a>
+					</li>
+					<li class="nav__item">
+						<a href="score.html">
+							<span class="nav__item-text">成绩</span>
+						</a>
+					</li>
+					<li class="nav__item">
+						<a href="page.html">
+							<span class="nav__item-text">战意</span>
+						</a>
+					</li>
+					<li class="nav__item">
+						<a href="game.html">
+							<span class="nav__item-text">游戏</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<label class="nav__btn" for="menu-cb"></label>
+		</nav>
+		<link rel="stylesheet" href="nav.css">
+		<style>
+			.main{
+				transform-style: preserve-3d;
+				transition: all ease 1s;
+				position: relative;
+				width: 450px;
+				height: 100%;
+				margin:0 auto;
+				left:0;
+				top:0;
+				
+			}
+			.front,.back{
+			background:white;
+			position: absolute;
+			left: 0;
+			top: 50%;
+			margin-top: -300px;
+			width: 450px;
+			height: 600px;
+			backface-visibility: hidden;
+		}
+			.back{
+			 transform: rotateY(180deg);
+			 z-index: 2;
+		}
+		label{
+			font-family: 'myfont';
+			letter-spacing: 1px;
+		}
+		.front{
+			z-index: 2;
+		}
+		.mactive{
+			 transform: rotateY(180deg);
+		}
+		
+		</style>
+		<!-- 成绩表单 -->
+		<div class="main">
+				<form action="http://ireader.qztc.edu.cn/cgi-bin/weblogin.pl" target="_top" name="form1" method="post">
+				<div class="wrap front" id="login">
+						<div class="title">
+							<div class="bb"></div>
+						</div>
+						<div class="user">
+							<label for="user">请输入iReader账号(学生号)</label>
+							<input class="texts" id="user" type="text" name="user" autocomplete="off">
+							<div class="x">×</div>
+						</div>
+						<div class="password">
+							<label for="passwd">请输入密码(身份证后6位)</label>
+							<input class="texts" id="passwd" type="password" name="passwd" autocomplete="off">
+							<i id="eye">
+							<span>&#xe624;</span>
+							<span>&#xe625;</span>
+							</i>
+						</div>
+						<input type="hidden" name="type" value="1" id="type">
+						<div class="login">
+							<input class="btn" name="button1" type="submit" value="登录" formtarget="_blank" style="font-family:'微软雅黑';color:rgba(255,255,255,1.00)">
+						</div>
+						<img src="bottomline.png" style="z-index:1000;width:320px;margin:0 auto; position:absolute;top:85%;left:14%;">
+						<img src="man.png" width="60px" style="position:absolute;top:68.8%;right:66%;z-index:1000;">
+						<div class="design">使用指南</div>
+						<span class="school">[泉州师范学院]</span>
+				</div>
+				</form>
+				<link href="https://cdn.bootcss.com/Swiper/4.0.1/css/swiper.min.css" rel="stylesheet">
+				<script src="https://cdn.bootcss.com/Swiper/4.0.1/js/swiper.min.js"></script>
+				<style>
+					.warn{
+						    width: 450px;
+    height: 415px;
+    position: absolute;
+    left: 50%;
+    margin-left: -225px;
+    top: 50%;
+    margin-top: -210px;
+
+					}
+					.warn ol{
+						  padding:0 30px;
+						  list-style:none
+					}
+					.warn ol li{
+							font-family: 'myfont';
+							font-size: 24px;
+							height: auto;
+							margin-bottom: 10px;
+							letter-spacing: 2px;
+					}
+					   .swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      padding-bottom: 10px;
+      opacity: .6;
+      filter: grayscale(.6);
+    }
+     .swiper-slide-active{
+     	opacity: 1;
+     	filter: grayscale(0);
+     }
+    .swiper-slide img{
+    	border-radius: 15px;
+    	border:2px solid rgba(131, 130, 130, 0.32);
+    	box-shadow: 0px 6px 10px 2px rgba(0, 0, 0, 0.22)
+    }
+    .swiper-button-prev{
+    	    background: url(left.png);
+    width: 100px;
+    height: 100px;
+    transform: rotateY(180deg);
+    margin-left: -10px;
+        margin-top: -68px;
+    }
+    .swiper-button-next{
+    	    background: url(left.png);
+    width: 100px;
+    height: 100px;
+    margin-right: -10px;
+        margin-top: -68px;
+    }
+
+				</style>
+				<div class="wrap back">
+					<div class="title title2">
+							<div class="bb bb2" style="background: url(my.jpg); background-size: 100%"></div>
+					</div>
+					<div class="warn cover"></div>
+					<div class="warn">
+					  <!-- Swiper -->
+					  <div class="swiper-container">
+					    <div class="swiper-wrapper">
+					      <div class="swiper-slide"><img src="tips/tip1.png" width="250" alt=""></div>
+					      <div class="swiper-slide"><img src="tips/tip2.png" width="250" alt=""></div>
+					      <div class="swiper-slide"><img src="tips/tip3.png" width="250" alt=""></div>
+					      <div class="swiper-slide"><img src="tips/tip4.png" width="250" alt=""></div>
+
+					    </div>
+						<div class="swiper-button-prev"></div><!--左箭头-->
+    					<div class="swiper-button-next"></div><!--右箭头-->
+    	
+					  </div>
+
+					</div>
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },  
+      	effect: 'coverflow',
+				loop: true,
+				grabCursor: true,
+				centeredSlides: true,
+				slidesPerView: 'auto',
+			
+				coverflowEffect: {
+					rotate: 10,
+					stretch: 100,
+					depth: 500,
+					modifier: 1,slideShadows:false
+				}
+				,
+    });
+  </script>
+  <img src="big.png" style="    z-index: 1000;
+    width: 320px;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 14.2%;
+    filter: brightness(2.2);
+    margin-top: -280px;
+    transform: scaleY(0.8) SCALEX(.9);">
+    <img src="small.png" style="    z-index: -1;
+    width: 320px;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 14.2%;
+    filter: brightness(3.5);
+    margin-top: 164px;
+    transform: scale(0.65);
+" alt="">
+					<div class="design design2">返回登录</div>
+						<span class="school" style="color: #49a9f9;">[泉州师范学院]</span>
+				</div>
+		</div>
+				<script>
+					$(function(){
+						$('.design').click(function(event) {
+							$(".main").toggleClass('mactive');
+						});
+
+					})
+				</script>
+					
+
+		<style>
+
+			
+			
+			.btn{
+				background: rgb(82, 199, 243);
+				    border-radius: 27px;
+				letter-spacing: 5px;
+				border:1px solid #16afff;
+				font-family: 'myfont'
+			}
+
+
+			.school{
+				color:rgb(82, 199, 243);
+
+			}
+
+			#footer2{	
+		position: fixed;
+		width: 190px;
+		height: 30px;
+		left: 50%;
+		bottom:20px;
+		font-size: .7em;
+		font-family: "myfont",仿宋, "Josefin Sans", Helvetica, "Helvetica Neue", Arial, sans-serif;
+		font-weight: lighter;
+		margin-left: -95px;
+		display: inline;
+		color: #616161;
+		line-height: 1.4em;
+		font-weight: 100;
+		z-index: 9999;
+		cursor: pointer;
+		text-align: center;
+		-webkit-font-smoothing: antialiased;
+		}
+		#footer2:after {
+		content: '|';
+		color: #3B3B3B;
+		line-height: 38px;
+		animation: cursor 1s linear infinite;
+		}
+		.title2{
+			transform: scale(0.7) translate(0px,-32px)
+		}
+		.bb2,.bb2::before, .bb2::after {
+			border-radius: 0;
+		
+		}
+		.bb2::before,.bb2::after{
+			animation: clipMe 4s linear infinite;
+		}
+		 .bb2::after{
+		 	animation-delay: -2s
+		 }
+		 .bb:hover::after, .bb:hover::before {
+		background-color: rgba(82, 199, 243,.3)
+		}
+	
+		.bottom{
+				position: fixed;
+				width: 500000px;
+				height: 70px;
+				background: url(tips/water1.png) repeat-x;
+				bottom: 0;
+				filter: brightness(1);
+				opacity: .5;
+				animation: mynn 40s infinite linear;
+				z-index: -1;
+				margin-bottom: -18px;
+				filter: brightness(1.12);
+				left: 0;
+			}
+			.bottom2{
+				position: fixed;
+				width: 5000000px;
+				height: 70px;
+				background: url(tips/water2.png) repeat-x;
+				bottom: 0;
+				filter: brightness(1);
+				opacity: .5;
+				animation: mynn 20s infinite linear;
+				z-index: 10;
+				    margin-bottom: -18px;
+				    left:0;
+			}
+					  .design2{
+		    	background-color:#49a9f9;
+		    	border:none;
+		    }
+			@keyframes mynn{
+				0%,100%{
+					transform: translate(0,0)
+				}
+				50%{
+					transform: translate(-1800px,0);
+				}
+			}
+		</style>
+		<div class="footer2" id="footer2"></div>
+		<div class="bottom">
+		</div>
+		<div class="bottom2">
+		</div>
+		<!-- 背景动态 -->
+		<script src="scoreBg.js"></script>
+	</body>
+</html>

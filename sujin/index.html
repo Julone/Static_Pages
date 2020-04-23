@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>主页</title>
+	<link rel="stylesheet" href="res/swiper.css">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			background: url(image/bg.jpg) no-repeat;
+			overflow-x: hidden;
+		}
+
+		*::selection {
+			background: #ECBF7C
+		}
+
+		.swiper-container {
+			width: 1200px;
+			height: 550px;
+			margin: 20px auto;
+			border-radius: 20px;
+			box-shadow: 0px 3px 11px 4px rgba(0, 0, 0, 0.22);
+			margin-bottom: 30px;
+		}
+
+		.swiper-slide {
+			text-align: center;
+			font-size: 18px;
+			background: #fff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.swiper-pagination-bullet {
+			background: url(image/eat.png);
+			background-position: 0px 16px;
+			width: 16px;
+			height: 16px;
+			transform: translate(0px, -3px) scale(.9);
+			filter: brightness(.9);
+			cursor: pointer;
+		}
+
+		.swiper-pagination-bullet-active {
+			background: url(image/eat.png);
+			background-position: 0px 0px;
+			width: 18px;
+			height: 18px;
+			transform: translate(0, -3px) scale(.9);
+		}
+
+		.swiper-pagination-bullet:hover {
+			filter: brightness(1)
+		}
+
+		.page {
+			width: 1100px;
+			margin: 50px auto;
+			display: flex;
+			justify-content: center;
+		}
+
+		.page .img {
+			width: 800px;
+			overflow: hidden;
+			box-shadow: 8px 6px 17px 4px rgba(123, 154, 241, 0.41);
+
+		}
+
+		.page .img img.move {
+			transition: all ease 1.51s;
+			filter: brightness(.9);
+			width: 671px;
+			animation: move linear 6s infinite;
+		}
+
+		.page .img img.static {
+			transition: all ease 1.51s;
+			filter: brightness(.9);
+			width: 671px;
+		}
+
+		.page .img img:hover {
+			transform: scale(1.1);
+			filter: brightness(1.1);
+			box-shadow: 0 0 10px 10px black;
+		}
+
+		.page .info {
+			width: 500px;
+			height: 300px;
+			margin-top: 45px;
+			background: white;
+			padding-top: 80px;
+			padding-left: 42px;
+			padding-right: 42px;
+			z-index: -1;
+			font-family: '微软雅黑';
+			border: 1px solid #DAC189;
+			padding-bottom: 250px;
+			margin-left: -5px;
+		}
+
+		.page .info span {
+			font-family: '等线';
+			font-size: 14px;
+			line-height: 20px;
+		}
+
+		.page .info h1 {
+			letter-spacing: 3px;
+			font-weight: 500;
+		}
+
+		.page .info h4 {
+			margin-top: 10px;
+			font-family: '等线';
+			font-weight: 100;
+			line-height: 24px;
+		}
+
+		.divider {
+			width: 1000px;
+			margin: 0 auto;
+			display: flex;
+			justify-content: center;
+			margin: 20px auto;
+		}
+
+		@keyframes move {
+			0%,100% {
+				transform: translate(0, 0) scale(1.2);
+			}
+			50% {
+				transform: translate(20px, 10px) scale(1.2)
+			}
+			80% {
+				transform: translate(10px, 20px) scale(1.2)
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<!-- 导航 -->
+	<nav class="nav">
+		<input type="checkbox" class="nav__cb" id="menu-cb">
+		<div class="nav__content">
+			<ul class="nav__items">
+				<li class="nav__item">
+					<a href="index.html">
+						<span class="nav__item-text">首页</span>
+					</a>
+				</li>
+				<li class="nav__item">
+					<a href="page1.html">
+						<span class="nav__item-text">文章</span>
+					</a>
+				</li>
+				<li class="nav__item">
+					<a href="page2.html">
+						<span class="nav__item-text">图集</span>
+					</a>
+				</li>
+				<li class="nav__item">
+					<a href="page3.html">
+						<span class="nav__item-text">关于</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<label class="nav__btn" for="menu-cb"></label>
+	</nav>
+	<link rel="stylesheet" href="res/nav.css">
+	<!-- 轮播图 -->
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">
+				<img src="image/bg1.jpg" width="1200" alt="">
+			</div>
+			<div class="swiper-slide">
+				<img src="image/bg2.jpg" width="1200" alt="">
+			</div>
+			<div class="swiper-slide">
+				<img src="image/bg3.jpg" width="1200" alt="">
+			</div>
+		</div>
+		<div class="swiper-pagination"></div>
+	</div>
+
+	<script src="res/swiper.js"></script>
+	<script>
+		var swiper = new Swiper('.swiper-container', {
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true,
+			},
+			autoplay: true,
+			spaceBetween: 10,
+			loop: true
+		});
+		window.onload = function () {
+			setTimeout(function () {
+				document.getElementById('menu-cb').click();
+			}, 300)
+		}
+	</script>
+	<!-- 分割线 -->
+	<div class="divider">
+		<img src="image/fenge.png" width="2560" alt="">
+	</div>
+
+	<a href="page1.html">
+		<div class="page">
+
+			<div class="img">
+				<img class="move" src="image/page1.jpg" alt="">
+			</div>
+			<div class="info">
+				<span>三月31,2018</span>
+				<h1>年少不懂《还珠3》，看懂已是而立年</h1>
+				<h4>《还珠3》刚播出的时候，我并不喜欢。 那时候我觉得黄奕没有赵薇眼睛大，没有赵薇活泼可爱。马伊俐又没</h4>
+			</div>
+
+		</div>
+	</a>
+	<a href="page2.html">
+		<div class="page">
+
+			<div class="info">
+				<span>三月28,2018</span>
+				<h1>要么孤独，要么庸俗</h1>
+				<h4> 刷朋友圈的时候，看到一条由三感音乐故事拍摄的短视频，被文案戳中了泪点。 22岁生日，一个人吃火...</h4>
+			</div>
+			<div class="img">
+				<img class="static" src="image/page2.jpg" alt="">
+			</div>
+
+		</div>
+	</a>
+
+	<a href="page3.html">
+		<div class="page">
+
+			<div class="img">
+				<img class="move" src="image/page3.jpg" alt="">
+			</div>
+			<div class="info">
+				<span>三月24,2018</span>
+				<h1>我们都曾畏惧告别</h1>
+				<h4>我实际上是个十分口拙的人。而且，特别是在关键时刻尤为口拙。比如告别。 告别似乎是一个普遍公认的隆...</h4>
+			</div>
+
+		</div>
+	</a>
+	<a href="page4.html">
+		<div class="page">
+
+			<div class="info">
+				<span>三月18,2018</span>
+				<h1>余生，我们一起吃饭</h1>
+				<h4>我和他总是在学校的食堂里相遇。每次遇见他，我总是拉着自己的饭友跑到一个偏僻的角落里就餐。 我不想...</h4>
+			</div>
+			<div class="img">
+				<img class="static" src="image/page4.jpg" alt="">
+			</div>
+
+		</div>
+	</a>
+	<a href="page5.html">
+		<div class="page">
+
+			<div class="img">
+				<img class="move" src="image/page5.jpg" alt="">
+			</div>
+			<div class="info">
+				<span>三月14,2018</span>
+				<h1>我终于瘦下来了，却不再喜欢你</h1>
+				<h4>许桐最大的毛病就是贪吃。 她尤其喜欢吃甜食，精致的蛋糕、松软的面包、酥脆的饼干都是她的心头好...</h4>
+			</div>
+
+		</div>
+	</a>
+	<a href="page6.html">
+		<div class="page">
+
+			<div class="info">
+				<span>三月12,2018</span>
+				<h1>说句再见吧，少年</h1>
+				<h4>毕业之后，我和大学的很多同学都留在了这座不大的城市里，两个室友在学校附近租了一套小资豪华房，我...</h4>
+			</div>
+			<div class="img">
+				<img class="static" src="image/page6.jpg" alt="">
+			</div>
+
+		</div>
+	</a>
+	<a href="page7.html">
+		<div class="page">
+
+			<div class="img">
+				<img class="move" src="image/page7.jpg" alt="">
+			</div>
+			<div class="info">
+				<span>三月8,2018</span>
+				<h1>失恋，让我成为更好的人</h1>
+				<h4>我是在机场认识的栗子姐，跟她在自助充电那儿偶遇，在等待电充满的时间里，我们随便聊了几句。 她说...</h4>
+			</div>
+
+		</div>
+	</a>
+
+</body>
+
+</html>

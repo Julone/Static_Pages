@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta name="apple-mobile-web-app-status-bar-style" content="white">
+	<meta name="screen-orientation" content="portrait">
+	<meta name="full-screen" content="yes">
+	<meta name="browsermode" content="application">
+	<meta name="x5-orientation" content="portrait">
+	<meta name="x5-fullscreen" content="true">
+	<meta name="x5-page-mode" content="app">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Enjoy Life</title>
+	<link rel="stylesheet" href="loading.css">
+	<link rel="stylesheet" href="bootstrap.min.css">
+		<link rel="stylesheet" href="swiper.css">
+	<link rel="stylesheet" href="index.css">
+	<script src="jquery.min.js"></script>
+	<script src="bootstrap.min.js"></script>
+	<script src="swiper.min.js"></script>
+	<script src="pubu.js"></script>
+</head>
+<script>
+	$(window).on('load',function() {
+			setTimeout(function(){
+				$('body').addClass('loaded');
+     			$('#loader-wrapper .load_title #loader').remove();
+ 			}, 400)
+		})
+	$(function () {
+		$("#loader").click(function(){
+			$('body').addClass('loaded');
+ 			$('#loader-wrapper .load_title #loader').remove();
+		});
+		$('.menu-logo').click(function (event) {
+			if (!$('.search').hasClass('search-active')) {
+				$(this).toggleClass('menu-logo-active');
+				$('.menu').slideToggle(500);
+			} else {
+				$('.search').toggleClass('search-active').val("");
+				$(this).removeClass('menu-logo-active');
+			}
+		})
+		$('.search-icon').click(function (event) {
+			if ($('.menu').is(':hidden') && !$('.search').hasClass('search-active')) {
+				$('.search').addClass('search-active')
+
+				// 显示搜索框
+				$('.menu-logo').addClass('menu-logo-active');
+
+				// 显示关闭按钮
+			} else {
+				// 搜索
+				alert('正在搜索...');
+			}
+		})
+
+		// 轮播图
+		$('.carousel').carousel({
+			interval: 4000,
+			pause: 'hover'
+		});
+		var $carousels = $('.carousel');
+		var startX, endX;
+		var offset = 50;
+		$carousels.on('touchstart', function (e) {
+			startX = e.originalEvent.touches[0].clientX;
+		});
+		$carousels.on('touchmove', function (e) {
+			endX = e.originalEvent.touches[0].clientX;
+		});
+		$carousels.on('touchend', function (e) {
+			var distance = Math.abs(startX - endX);
+			if (distance > offset) {
+				$(this).carousel(startX > endX ? 'next' : 'prev');
+			}
+		})
+		$(".j-t").click(function (event) {
+			$(".j-t").removeClass('j-t-active');
+			$(this).addClass('j-t-active');
+			var index = $(this).index();
+			$(".j-pubu").hide();
+			$(".j-pubu").eq(index).show();
+		});
+		// 顶栏
+		window.addEventListener("scroll", function () {
+			if ($(document).scrollTop() != 0) {
+				$(".head").addClass("fixed");
+				if ($(document).scrollTop() >= 300) {
+					$('.back-top').fadeIn(500);
+				} else {
+					$('.back-top').fadeOut(500);
+				}
+			} else if ($(window).scrollTop() == 0) {
+				$(".head").removeClass("fixed");
+				$('.back-top').hide()
+			}
+		});
+		$('.back-top').click(function () {
+			$('html,body').animate({
+				scrollTop: '-100px'
+			}, 1000)
+		})
+		// 底部导航栏
+		$("body .container-fluid").eq(0).show().siblings('.container-fluid').not('.nav').hide();
+		$(".nav li").click(function (event) {
+			var index = $(this).index();
+			$(window).scrollTop(0);//弹回顶部
+			$('body .container-fluid').eq(index).fadeIn(500).siblings('div').not('.nav').fadeOut(500);
+			$(this).addClass('nav-active').siblings('li').removeClass('nav-active');
+		})
+		$("#msg div ul li").click(function () {
+			window.location.href = "聊天/Untitled-1.html";
+		})
+	})
+</script>
+
+<body>
+	<!-- 加载动画 -->
+	<div id="loader-wrapper">
+		<div id="loader" style="background: #1ed1d9;cursor: pointer;"></div>
+		<div class="loader-section section-left" style="background: linear-gradient(to bottom, #2ad9ca , #09c3f2)"></div>
+		<div class="loader-section section-right" style="background: linear-gradient(to bottom, #2ad9ca , #09c3f2)"></div>
+	</div>
+	<!-- 主页 -->
+	<div class="container-fluid" style="overflow-x: hidden;" id="home">
+		<div class="row head">
+			<div class="col-lg-2 col-xs-2"></div>
+			<div class="col-lg-8 col-xs-8">
+				<div class="text-center main-title">
+					主页
+				</div>
+			</div>
+			<div class="col-lg-2 col-xs-2"></div>
+			<img class="search-icon" src="img/search.png" width="30" alt="">
+			<input type="text" placeholder="搜你想搜" class="container search">
+			<div class="menu-logo"></div>
+			<!--菜单按钮-->
+			<div class="menu">
+				<ul>
+					<li>
+						<a href="#">定位</a>
+					</li>
+					<li>
+						<a href="#">设置</a>
+					</li>
+					<li>
+						<a href="#">帮助</a>
+					</li>
+					<li>
+						<a href="#">关于</a>
+					</li>
+				</ul>
+			</div>
+			<!--菜单-->
+		</div>
+		<div id="myCarousel" class="carousel slide center-block">
+			<!-- 轮播小圆点-->
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>
+			<!-- 轮播图片项目 -->
+			<div class="carousel-inner center-block">
+				<div class="item active">
+					<a href="http://www.baidu.com">
+						<img src="img/lunbo/lunbo3.jpeg" alt="First slide">
+					</a>
+				</div>
+				<div class="item">
+					<a href="http://www.baidu.com">
+						<img src="img/lunbo/lunbo1.jpeg" alt="Second slide">
+					</a>
+				</div>
+				<div class="item">
+					<a href="http://www.baidu.com">
+						<img src="img/lunbo/lunbo2.jpeg" alt="Third slide">
+					</a>
+				</div>
+			</div>
+		</div>
+		<!--十个图标-->
+		<div class="row container btn-shop">
+			<div class="col-xs-2">
+				<img src="img/home-icon/btn1.png" alt="">
+				<p>美容</p>
+			</div>
+			<div class="col-xs-2">
+				<img src="img/home-icon/btn2.png" alt="">
+				<p>美发</p>
+			</div>
+			<div class="col-xs-2">
+				<img src="img/home-icon/btn3.png" alt="">
+				<p>美甲</p>
+			</div>
+			<div class="col-xs-2">
+				<img src="img/home-icon/btn4.png" alt="">
+				<p>美体</p>
+			</div>
+			<div class="col-xs-2">
+				<img src="img/home-icon/btn5.png" alt="">
+				<p>美齿</p>
+			</div>
+			<div class="col-xs-2">
+				<img src="img/home-icon/btn6.png" alt="">
+				<p>养生</p>
+			</div>
+			<div class="col-xs-2">
+				<img src="img/home-icon/btn7.png" alt="">
+				<p>护理</p>
+			</div>
+			<div class="col-xs-2">
+				<img src="img/home-icon/btn8.png" alt="">
+				<p>整形</p>
+			</div>
+			<div class="col-xs-2">
+				<img src="img/home-icon/btn9.png" alt="">
+				<p>SPA</p>
+			</div>
+			<div class="col-xs-2">
+				<img src="img/home-icon/btn10.png" alt="">
+				<p>全部</p>
+			</div>
+		</div>
+		<!-- 返回顶部 -->
+		<div class="back-top">Top</div>
+
+		<div class="container center-block pic-items border" style="padding-top: 5px;">
+			<div class="col-xs-6">
+				<img class="img-responsive" src="img/family.png">
+			</div>
+			<div class="col-xs-6">
+				<img class="img-responsive" src="img/lovers.png">
+			</div>
+		</div>
+
+		<!-- 推荐 -->
+		<div class="center-block text-center hot-title">
+			热门推荐
+		</div>
+		<div class="container  hot swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<img src="img/res/hot1.jpg">
+					<div class="hot-right">
+						<div class="shop-name">泉州酒店温陵中餐厅</div>
+						<div class="shop-info">[泉州酒店周边]中餐厅1188餐，建议8-10人使用</div>
+						<div class="price">
+							<span class="strong">1028</span>
+							<span class="strong-color">元</span>
+							<small>
+								<del>1548元</del>
+							</small>
+							<span class="sold">
+								已售42
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<img src="img/res/hot2.jpg">
+					<div class="hot-right">
+						<div class="shop-name">泊捷时尚酒店</div>
+						<div class="shop-info">[酒店]MiNi房钟点房4小时，免费WiFi。温馨，舒适</div>
+						<div class="price">
+							<span class="strong">69</span>
+							<span class="strong-color">元</span>
+							<small>
+								<del>98元</del>
+							</small>
+							<span class="sold">
+								已售102
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<img src="img/res/hot3.jpg">
+					<div class="hot-right">
+						<div class="shop-name">泊捷时尚酒店</div>
+						<div class="shop-info">[酒店]MiNi房钟点房4小时，免费WiFi。温馨，舒适</div>
+						<div class="price">
+							<span class="strong">69</span>
+							<span class="strong-color">元</span>
+							<small>
+								<del>98元</del>
+							</small>
+							<span class="sold">
+								已售102
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			var swiper = new Swiper('.swiper-container', {
+				effect: 'coverflow',
+				loop: true,
+				grabCursor: true,
+				centeredSlides: true,
+				slidesPerView: 'auto',
+				// autoplay:{
+				// 	delay: 4000,
+				// 	disableOnInteraction:false},
+				coverflowEffect: {
+					rotate: 10,
+					stretch: 50,
+					depth: 500,
+					modifier: 1
+				}
+			});
+		</script>
+
+		<div class="center-block text-center hot-title love-life">
+			商家推荐
+		</div>
+		<div class="container j-shop-list row">
+			<ul>
+				<li>
+					<div class="j-shop-name col-xs-4">
+						<img src="img/res/shanjia1.jpg">
+
+					</div>
+					<div class="hot-right col-xs-8 hot-zi">
+						<div class="shop-name">哇嘎尼冈·刨冰火锅</div>
+						<div class="shop-info">[六灌路]夏日劲爽“冰火锅”4选1</div>
+						<div class="price">
+							<span class="strong">58</span>
+							<span class="strong-color">元/人均</span>
+							<small>
+								<discount>五折</discount>
+							</small>
+							<span class="sold">
+								已售2102
+							</span>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="j-shop-name col-xs-4 ">
+						<img src="img/res/shanjia2.jpg">
+					</div>
+					<div class="hot-right col-xs-8 hot-zi">
+						<div class="shop-name">舒曼酒店</div>
+						<div class="shop-info">[丰泽区]标准单人房钟点房4小时，免费WiFi。美食街中段，交通便利</div>
+						<div class="price">
+							<span class="strong">96</span>
+							<span class="strong-color">元/人均</span>
+							<small>
+								<discount>限时减12</discount>
+							</small>
+							<span class="sold">
+								已售1002
+							</span>
+						</div>
+					</div>
+				</li>
+				<li class="j-test">
+					<div class="j-shop-name col-xs-4 ">
+						<img src="img/res/shanjia3.jpg">
+					</div>
+					<div class="hot-right col-xs-8 hot-zi">
+						<div class="shop-name">西北牛肉</div>
+						<div class="shop-info">[丰泽区]标准单人房钟点房4小时，免费WiFi。美食街中段，交通便利</div>
+						<div class="price">
+							<span class="strong">396</span>
+							<span class="strong-color">元/人均</span>
+							<small>
+								<!-- <discount>限时减12</discount> -->
+							</small>
+							<span class="sold">
+								已售1122
+							</span>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<br>
+			<br>
+			<br>
+		</div>
+	</div>
+	</div>
+	<!-- 发现板块 -->
+	<div class="container-fluid text-center" id="shop">
+		<div class="row head">
+			<div class="col-lg-2 col-xs-2">
+			</div>
+			<div class="col-lg-8 col-xs-8 j-title">
+				<div class="text-center main-title j-t j-t-active">
+					发现
+				</div>
+				<div class="text-center main-title j-t">
+					关注
+				</div>
+			</div>
+			<a href="发布/index.html">
+			<div class="col-lg-2 col-xs-2" style="font-size: 30px;color: white;">
+			+
+			</div></a>
+		</div>
+		<div class="container">
+			<section id="demo1" class="j-pubu">
+				<article class="white-panel">
+					<div class="find-block-head">
+						<img src="img/luozhi.png" alt="">
+						<span>朱碧石</span>
+						<input type="button" value="关注">
+					</div>
+					<img src="img/res/ad.png" alt="...">
+					<p class="f-content">“魔盒”在手，瓷肌立有！雪花秀（sulwhasoo）气垫BB霜，附送替换装！“水彩”着色技术，具有很好遮瑕力，让瑕疵隐形；“柔滑定妆膜”技术，持久不脱妆；打造水感瓷肌，肌肤吹弹可破！</p>
+
+					<div class="find-bottom">
+						<div class="f-time">刚才</div>
+						<div class="find-btn">
+							<input type="button" value="点赞520">
+							<input type="button" style="background: #1B9AF7" value="评论1232">
+						</div>
+					</div>
+				</article>
+				<article class="white-panel">
+					<div class="find-block-head">
+					<img src="img/tina.jpg" alt="">
+						<span>Tina</span>
+						<input type="button" value="关注">
+					</div>
+					<p class="f-content">【官方授权】 生命不息，战“痘”不止！美迪惠尔茶树油修护精华面膜（10片），特含液体茶树精油，成就祛痘3步曲！控油祛痘、舒缓肌肤、收缩毛孔，痘痘byebye，肌肤亮出来！精选面膜纸，每滴精华都不浪费，层层渗入肌肤，从此不做“痘”逼！</p>
+					<div class="find-bottom">
+						<div class="f-time">3分钟前</div>
+						<div class="find-btn">
+							<input type="button" value="点赞1314">
+							<input type="button" style="background: #1B9AF7" value="评论3333">
+						</div>
+					</div>
+				</article>
+				<article class="white-panel">
+					<div class="find-block-head">
+					<img src="img/luhan.jpg" alt="">
+						<span>Julone</span>
+						<input type="button" value="关注">
+					</div>
+					<img src="img/res/ad2.jpg">
+					<p class="f-content">植村秀认为，“每一张脸都是一块充满生命力的画布，只有拥有的肤质，才能让艺术家在这张称之为肌肤的画布上创作出美丽的作品。”给予这个肌肤画布原理，植村秀致力开发出一系列缔造肌肤和美丽妆容的产品。品牌理念植村秀品牌由具有传奇经历的日本彩妆大师、美容界先驱人物—植村秀先生创立，并用他的名字命名。自创立以来，植村秀打破了在创造美的过程中的一切界限。秉承着“自然，科学，...</p>
+					<div class="find-bottom">
+						<div class="f-time">10分钟前</div>
+						<div class="find-btn">
+							<input type="button" value="点赞">
+							<input type="button" style="background: #1B9AF7" value="评论">
+						</div>
+					</div>
+				</article>
+			</section>
+			<!-- 已经关注 -->
+			<section id="demo2" class="j-pubu" style="display: none">
+				<article class="white-panel">
+					<div class="find-block-head">
+					<img src="img/fiora.png" alt="">
+						<span>Fiora</span>
+						<input type="button" value="已关注">
+					</div>
+					<p class="f-content">【官方授权】 生命不息，战“痘”不止！美迪惠尔茶树油修护精华面膜（10片），特含液体茶树精油，成就祛痘3步曲！控油祛痘、舒缓肌肤、收缩毛孔，痘痘byebye，肌肤亮出来！精选面膜纸，每滴精华都不浪费，层层渗入肌肤，从此不做“痘”逼！</p>
+					<div class="find-bottom">
+						<div class="f-time">昨天</div>
+						<div class="find-btn">
+							<input type="button" value="点赞1221">
+							<input type="button" style="width:37%;background: #1B9AF7" value="评论532">
+						</div>
+					</div>
+				</article>
+				<article class="white-panel">
+					<div class="find-block-head">
+					<img src="img/fiora.png" alt="">
+						<span>Fiora</span>
+						<input type="button" value="已关注">
+					</div>
+					<img src="img/res/ad3.jpg">
+					<p class="f-content">Dior迪奥烈艳蓝金唇膏再度突破创意，推出首款4种妆效的液态唇膏：摇滚哑光、经典缎光、电光金属、丝绒裸妆。 
+唇彩般轻盈舒适，唇膏般细腻顺滑，高遮盖力，超持妆显色。</p>
+					<div class="find-bottom">
+						<div class="f-time">前天</div>
+						<div class="find-btn">
+							<input type="button" value="点赞2333">
+							<input type="button" style="width:37%;background: #1B9AF7" value="评论1222">
+						</div>
+					</div>
+				</article>
+			</section>
+
+			<script>
+				$(function () {
+					$(function () {
+						$("#gallery-wrapper").pinterest_grid({
+							no_columns: 4,
+							padding_x: 10,
+							padding_y: 10,
+							margin_bottom: 50,
+							single_column_breakpoint: 700
+						});
+
+					});
+				})
+			</script>
+		</div>
+	</div>
+	<!-- 消息板块 -->
+	<div class="container-fluid" id="msg">
+		<div class="row head">
+			<div class="col-lg-2 col-xs-2">
+			</div>
+			<div class="col-lg-8 col-xs-8">
+				<div class="text-center main-title">
+					消息中心
+				</div>
+			</div>
+			<div class="col-lg-2 col-xs-2">
+			</div>
+		</div>
+		<div class="container center-block msg-btn center-block" style="width: 103%;margin-left: -1.5%;">
+			<div class="col-xs-4 msg-btn-body">
+				<div class="one">
+					<img src="img/contact.png" alt="">
+				</div>
+				<span>联系人</span>
+			</div>
+			<div class="col-xs-4  msg-btn-body">
+				<div class="two">
+					<img src="img/comm.png" alt="">
+				</div>
+				<span>评论</span>
+			</div>
+
+			<div class="col-xs-4  msg-btn-body">
+				<div class="three">
+					<img src="img/info.png" alt="">
+				</div>
+				<span>通知</span>
+			</div>
+
+		</div>
+		<div class="container border items message-tile">
+			<ul>
+				<li>
+					<img src="img/res/lianxi1.jpg" class="img-circle">
+					<div>
+						<p>好乐意百货商场</p>
+						<span class="message-body">已经给你发货了,明天到</span>
+					</div>
+
+					<span class="message-time">刚才</span>
+				</li>
+				<li>
+					<img src="img/res/lianxi2.jpg" class="img-circle">
+					<div>
+						<p>锤子官方旗舰店</p>
+						<span class="message-body">好的</span>
+
+					</div>
+
+					<span class="message-time">12:54</span>
+				</li>
+				<li>
+					<img src="img/res/lianxi3.jpg" class="img-circle">
+					<div>
+						<p>Apple官方旗舰店</p>
+						<span class="message-body">请您核对订单</span>
+
+					</div>
+
+					<span class="message-time">昨天 </span>
+				</li>
+				<li>
+					<img src="img/res/lianxi4.jpg" class="img-circle">
+					<div>
+
+						<p>素点百货商店</p>
+						<span class="message-body">目前非工作时间,请您在上午9点至下午12点之间咨我们</span>
+					</div>
+					<span class="message-time">前天</span>
+				</li>
+			</ul>
+		</div>
+		<div class="container border items message-tile past-time">
+			<ul>
+				<li>
+					<img src="img/res/lianxi5.jpg" class="img-circle">
+
+
+					<div>
+						<p>百货商场</p>
+						<span class="message-body">请于明天到本店,提取货物</span>
+					</div>
+
+					<span class="message-time">2018/3/23</span>
+				</li>
+				<li>
+					<img src="img/res/lianxi6.jpg" class="img-circle">
+					<div>
+
+						<p>素点百货商店</p>
+						<span class="message-body">您预约的信息已保存 </span>
+					</div>
+					<span class="message-time">2018/3/22</span>
+				</li>
+				<li>
+					<img src="img/res/lianxi7.jpg" class="img-circle">
+					<div>
+
+						<p>聚焦商店</p>
+						<span class="message-body">目前非工作时间,请您在上午9点至下午12点之间咨我们</span>
+					</div>
+					<span class="message-time">2018/3/22</span>
+				</li>
+				<li>
+					<img src="img/res/lianxi8.jpg" class="img-circle">
+					<div>
+
+						<p>康王男鞋</p>
+						<span class="message-body">[成交!]</span>
+					</div>
+					<span class="message-time">2018/3/22</span>
+				</li>
+				<li>
+					<img src="img/res/lianxi9.jpg" class="img-circle">
+					<div>
+
+						<p>飞利浦剃须刀 </p>
+						<span class="message-body">我们会尽快发货 </span>
+					</div>
+					<span class="message-time">2018/3/22</span>
+				</li>
+				<li>
+					<img src="img/res/lianxi10.jpg" class="img-circle">
+					<div>
+
+						<p>素点百货商店</p>
+						<span class="message-body">我们会尽快答复您,请稍等</span>
+					</div>
+					<span class="message-time">2018/3/22</span>
+				</li>
+
+			</ul>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+	</div>
+
+	<!-- 我的板块 -->
+	<div class="container-fluid" id="mine">
+		<div class="row head">
+			<div class="col-lg-2 col-xs-2">
+			</div>
+			<div class="col-lg-8 col-xs-8">
+				<div class="text-center main-title">
+					个人中心
+				</div>
+			</div>
+			<div class="col-lg-2 col-xs-2">
+			</div>
+		</div>
+		<div class="container border">
+			<!-- 个人 -->
+			<div class="row">
+				<div class="col-xs-10">
+					<div class="row j-login">
+						<div class="col-xs-4">
+							<img class="img-circle center-block userhead" src="img/luhan.jpg" width="60" alt="">
+						</div>
+						<a href="登录/login.html" >
+						<div class="col-xs-6" id="username">
+							Julone
+						</div>
+						<div class="info">
+							<div class="col-xs-3">
+								积分
+								<span id="credit">
+									1000
+								</span>
+							</div>
+							<div class="col-xs-3" id="vip">大众会员</div>
+						</div>
+						</a>
+					</div>
+				</div>
+				<div class="col-xs-2">
+					<img src="img/enter.png" id="more" class=" pull-right" width="60" alt="">
+				</div>
+			</div>
+			<!-- order for user -->
+			<div class="row container text-center btn-order">
+				<div class="col-xs-3">
+					<img src="img/wallet.png" alt="">
+					<p>待付款</p>
+				</div>
+				<div class="col-xs-3">
+					<img src="img/order.png" alt="">
+					<p>待使用</p>
+				</div>
+				<div class="col-xs-3">
+					<img src="img/comment.png" alt="">
+					<p>待评价</p>
+				</div>
+				<div class="col-xs-3">
+					<img src="img/shouhou.png" alt="">
+					<p>售后</p>
+				</div>
+			</div>
+		</div>
+		<div class="container j-vip border">
+			<ul>
+				<li>
+				</li>
+			</ul>
+		</div>
+		<div class="container border items">
+			<ul>
+				<li>我的余额</li>
+				<li>优惠券</li>
+				<li>卡包</li>
+				<li>会员中心</li>
+			</ul>
+		</div>
+		<div class="container border items">
+			<ul>
+				<li>收藏</li>
+				<li>动态</li>
+				<li>浏览记录</li>
+			</ul>
+		</div>
+		<div class="container border items">
+			<ul>
+				<li>人工客服</li>
+				<li>帮助指南</li>
+				<li>关于我们</li>
+			</ul>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+	</div>
+	</div>
+
+	<!-- 导航栏板块 -->
+	<div class="nav">
+		<div class="container-fluid">
+			<ul class="row">
+				<li class="col-xs-3 nav-active">
+					<img src="img/nav/index.png" width="30px" alt="">
+				</li>
+				<li class="col-xs-3">
+					<img src="img/nav/find.png" width="30px" alt="">
+				</li>
+				<li class="col-xs-3">
+					<img src="img/nav/msg.png" width="30px" alt="">
+				</li>
+				<li class="col-xs-3">
+					<img src="img/nav/me.png" width="30px" alt="">
+				</li>
+			</ul>
+		</div>
+	</div>
+	<style>
+		.nav {
+			position: fixed;
+			bottom: 0;
+			width: 100%;
+			box-shadow: 0px 2px 47px rgba(149, 151, 152, 0.22);
+			z-index: 100;
+			border-top: 1px solid rgba(173, 173, 173, 0.32)
+		}
+
+		.nav div ul li {
+			list-style: none;
+			height: 46px;
+			background: #e6f0f2;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			transition: all ease .5s
+		}
+
+		.nav div ul li:first-child {
+			border-radius: .4rem 0 0 0;
+		}
+
+		.nav div ul li:last-child {
+			border-radius: 0 .4rem 0 0;
+		}
+
+		.nav-active {
+			box-shadow: 0px 0px 15px 33px rgba(218, 230, 247, 0.24) inset;
+			z-index: 100;
+		}
+	</style>
+</body>
+
+</html>

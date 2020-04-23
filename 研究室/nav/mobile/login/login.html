@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">	
+<title>login</title>
+<link rel="stylesheet" href="mine.css">
+<link rel="stylesheet" href="../bootstrap.min.css">
+</head>
+
+<body>
+	<div class="container-fluid text-center" id="shop">
+		<div class="row head">
+			<div class="col-lg-3 col-xs-3" id="chatback">
+				<div class="center-block" onclick="javascript:history.go(-1)" id="loginback">
+				<img src="返回.png" alt="back" width="30">
+				</div>	
+			</div>
+			<div class="col-lg-7 col-xs-7">
+				<div class="text-center main-title" id="chatfont">
+				</div>
+			</div>
+			<div class="col-lg-2 col-xs-2" id="chatshop" style="    font-size: 20px;
+    white-space: nowrap;
+    line-height: 40px;
+    padding: 7px;">
+				注册
+			</div>
+		</div>
+		</div>
+		<script>
+			window.onload = function() {
+				var btn = document.getElementById('chatshop');
+				btn.onclick = function () {
+					document.getElementById('denglu').value = '注册';
+					var forms = document.getElementsByTagName('form');
+					forms[0].style.display = "none";
+					forms[1].style.display = "block"
+				}
+				document.getElementById('loginback').onclick = function(){
+					location.reload();
+				}
+			}
+		</script>
+	<div class="logininterface">
+			<div class="loginuserhead">
+			<img src="QQ图片20180412165103.jpg" width="70" style="border-radius: 35px;">
+			</div>
+		    <div class="loginmokuai">
+			<form action="" method="post">
+			<center>
+			<div class="user">	
+			<input type="text" id="loginusername" placeholder="  请输入用户名">
+			</div>
+			<div class="password">	
+			<input type="password" id="loginuserpassword" placeholder="  请输入密码">
+			</div>
+			</center>	
+			<input type="submit" value="登录" id="denglu">	
+		    </form>
+		    <form action="" method="post" style = "display: none">
+			<center>
+			<div class="user">	
+			<input type="text" id="loginusername" placeholder="  请输入用户名">
+			</div>
+			<div class="password">	
+			<input type="password" id="loginuserpassword" placeholder="请输入密码">
+			</div>
+			<div class="password">	
+			<input type="password" id="loginuserpassword" placeholder="再次输入密码">
+			</div>
+			</center>	
+			<input type="submit" value="注册" id="denglu">	
+		    </form>
+		    </div>	
+	</div>
+</body>
+</html>

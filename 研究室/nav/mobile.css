@@ -1,0 +1,120 @@
+@media screen and (max-width: 800px){
+		.content{
+			flex-direction: column;
+			width: 100%;
+			height: 440px;
+			display: flex;
+			justify-content: center;
+			margin:0px auto;
+			margin-top: -62px;
+			z-index: 0;
+		}
+		.content div{
+			width: 80%;
+			max-width:800px;
+			height: 72px;
+			margin:0;
+			margin: 15px auto;
+			/*background:white !important;*/
+		}
+		.content div h1{
+			top:0px;
+			width: 70%;
+			height: inherit;
+			line-height: 68px;
+			text-align: left;
+			letter-spacing: 2px;
+			padding-left: 20px
+		}
+		.content div:hover{
+			height: 100px;
+		}
+		.content div:hover h1>span{
+			opacity: 0;
+		}
+		.content div:hover p{
+			top: 65px;
+			opacity: 1;
+		}
+		.content div p{
+		    position: absolute;
+    top: 100px;
+    width: 100%;
+    height: auto;
+    text-align: left;
+    color: white;
+    opacity: 0;
+    padding-left: 20px;
+    transition: all ease .6s;
+    letter-spacing: 2px;
+		}
+		.content div h1 span{
+			    top:6px;
+			    padding-left: 162px;
+    font-size: 20px;
+    text-align: left;
+    animation:spanAni 1s ease 1;
+		}
+		@keyframes spanAni{
+			from { letter-spacing: -15px}
+			to { letter-spacing: 1px }
+		}
+		.content div a{
+			    top: 0px;
+     margin-top: -18px !important; 
+    position: absolute;
+    right: 0% !important;
+    margin-left: 0 !important;
+    width: 140px;
+    height: 140px;
+    background-size: 100px 100px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: none;
+		}
+		.content div:hover a{
+			transform: scale(.65);
+			display: block;
+			animation: aHover 1s 1 ease forwards;
+			z-index: -1;
+		}
+		@keyframes aHover{
+			from{
+				transform: translate(1.5rem,3rem) scale(.2);
+				z-index: -1;
+			}
+			to{
+				transform: translate(1.65rem,0) scale(.6);
+				z-index: 10;
+			}
+		}
+		.footer{
+			    padding-top: 10px;
+		}
+		.footer br{
+			display: inline;
+		}
+		.swiper-slide{
+			height: 205px;
+		}
+		.swiper-container .swiper-slide{
+			height: 300px;
+		}
+	
+		.mainContent{
+			line-height: 20px;
+			font-size: 10px;
+		}
+		.mainBtm{
+			/*display: none;*/
+
+		}
+
+		.swiper-wrapper .swiper-slide div{
+			margin-top:7px !important;
+			    padding-bottom: 10px;
+		}
+	
+
+
+	}

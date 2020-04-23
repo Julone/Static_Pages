@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>游戏</title>
+	<meta name="viewport" content="width=device-width,initial-scale=0.6,user-scalable=yes">
+	<link rel="stylesheet" href="game.css">
+	<link rel="shortcut icon" href="icon/游戏.png" type="image/png">
+	<script src="jquery.min.js"></script>
+	<script src='three.min.js'></script>
+	<script src='TweenMax.min.js'></script>
+	<script>
+		$(window).load(function () {
+				setTimeout(load, 300)
+			});
+			$(function () {
+				$("#loader").click(load);
+				var timerloading = setInterval(function () {
+					if ($("body").hasClass('loaded')) {
+						setTimeout(function () {
+							$("#menu-cb").click()
+						}, 500)
+						clearInterval(timerloading)
+					}
+				}, 100)
+				navInform('#d3c3b7'); //导航标记
+				
+			var Ding = $(".audio")[0];
+			var Dong = $(".audio")[1];
+			if (!mobile) {
+				$("#control").toggle(function () {
+					Ding.play();
+				}, function name(params) {
+					Dong.play();
+				})
+			}
+
+			var storage = window.localStorage;
+			if (storage.getItem("topScore") == null)
+				storage.setItem("topScore", 0);
+			$("#control").click(function (event) {
+				if ($("#container").hasClass('playing') && $("#instructions").hasClass('hide')) {
+					$("#top").fadeIn(300);
+					if (parseInt(storage.getItem('topScore')) < parseInt($("#score").text())) {
+						storage.setItem("topScore", parseInt($("#score").text()));
+					}
+					$("#top").text(storage.getItem("topScore"))
+				} else $("#top").fadeOut(300)
+			});
+		})
+	</script>
+</head>
+
+<body>
+
+	<!-- 背景音乐 -->
+	<audio class="audio" src="drop.wav"></audio>
+	<audio class="audio" src="drop2.wav"></audio>
+	<link rel="stylesheet" href="bgmctrl.css">
+	<div class="h-audio">
+		<a href="javascript:void(0)" id="hAudioToggle" class="h-wave active">
+			<i class="wave1"></i>
+			<i class="wave2"></i>
+			<i class="wave3"></i>
+			<i class="wave4"></i>
+		</a>
+		<audio id="hAudioBg" src="game.mp3" autoplay loop></audio>
+	</div>
+	<!-- 加载动画 -->
+	<div id="loader-wrapper">
+		<div id="loader" style="background:rgb(197, 188, 181);cursor: pointer;"></div>
+		<div class="loader-section section-left" style="background:rgb(217, 206, 197);"></div>
+		<div class="loader-section section-right" style="background:rgb(217, 206, 197);"></div>
+	</div>
+	<link rel="stylesheet" href="loading.css">
+	<!-- 导航 -->
+	<nav class="nav">
+		<input type="checkbox" class="nav__cb" id="menu-cb">
+		<div class="nav__content">
+			<ul class="nav__items">
+				<li class="nav__item">
+					<a href="index.html">
+						<span class="nav__item-text">首页</span>
+					</a>
+				</li>
+				<li class="nav__item">
+					<a href="score.html">
+						<span class="nav__item-text">成绩</span>
+					</a>
+				</li>
+				<li class="nav__item">
+					<a href="page.html">
+						<span class="nav__item-text">战意</span>
+					</a>
+				</li>
+				<li class="nav__item">
+					<a href="game.html">
+						<span class="nav__item-text">游戏</span>
+					</a>
+				</li>
+				<!-- <li class="nav__item">
+					<a href="code.html">
+						<span class="nav__item-text">关于</span>
+					</a>
+				</li> -->
+			</ul>
+		</div>
+		<label class="nav__btn" for="menu-cb"></label>
+	</nav>
+	<link rel="stylesheet" href="nav.css">
+	<!-- 游戏 -->
+	<div id="container" style="z-index: -324234">
+		<div id="game"></div>
+		<div id="score">0</div>
+		<div id="top">0</div>
+		<div id="instructions" style="font-size: 2.5em;font-family: '方正姚体';margin-top:20px; ">日出江花红胜火,少年只需点一点!</div>
+		<div class="game-over">
+			<h2>Game Over</h2>
+			<p></p>
+		</div>
+		<div class="game-ready">
+			<div id="start-button" style="cursor: pointer;">Start</div>
+			<div></div>
+		</div>
+	</div>
+	<div id="control" style="width: 100vw;height: 60vh;position:absolute;bottom:0vh;"></div>
+	<!-- 游戏控制区域 -->
+	<script id="game" src="game.js"></script>
+
+
+</body>
+
+</html>

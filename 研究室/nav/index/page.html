@@ -1,0 +1,272 @@
+<html lang="en" class="js">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=0.45">
+	<title>战意</title>
+	<link rel="shortcut icon" href="icon/资料.png" type="image/png">
+	<link rel="stylesheet" href="loading.css">
+	<link rel="stylesheet" type="text/css" href="css/base.css">
+	<link rel="stylesheet" type="text/css" href="css/slider.css">
+	<script src="jquery.min.js"></script>
+	<script>
+		$(window).load(function () {
+			setTimeout(load, 300);
+		});
+		$(function () {
+			$("#loader").click(function () {
+				$('body').addClass('loaded');
+				$('#loader-wrapper .load_title').remove();
+			});
+			setTimeout(function () {
+				$("#menu-cb").click();
+			}, 700);
+			// 导航
+			navInform('#A1887F');
+			if(mobile){
+				$('.pieces-slider__button').css('top','73%');
+				$('.ability').css({
+					    left: '4vw',
+					    top: '25vh',
+					    transform: 'scale(0.95)'
+				});
+				$('.nav').css('left', '50vw');
+				$('canvas').css('top', '10vh');
+			}
+		})
+	</script>
+
+</head>
+
+<body class="demo-1">
+	<style>
+		body {
+			background: rgb(192, 187, 178);
+		}
+
+		.pieces-slider__image {
+			max-width: 1000px;
+			max-height: 820px;
+		}
+
+		.pieces-slider__button {
+			background: white;
+			opacity: .4;
+			color: rgba(0, 0, 0, .3);
+		}
+
+		.pieces-slider__button:hover {
+			background: white;
+			opacity: .8;
+		}
+
+		.ability {
+			width: 300px;
+			height: 400px;
+			position: absolute;
+			left: 10vw;
+			top: 70vh;
+			margin-top: -200px;
+			z-index: 100;
+			transform:scale(1.2)
+		}
+
+		.ability::before {
+		    content: '『历史渊源』';
+    font-size: 24px;
+    padding-left: 119px;
+    margin-top: -25px;
+    font-weight: 700;
+    color: #474747;
+    font-family: 'Fangsong';
+    opacity: .7;
+    font-weight: 900;
+    position: absolute;
+		}
+		.ability * {
+			font-size: 20px;
+			color: #6f6f6f;
+			height: auto;
+			width: 400px;
+			font-family: "Fangsong";
+			transition: all ease 0.76s;
+			display: none;
+			text-indent: 2em;
+			padding: 5px;
+			margin-top: 5px;
+		}
+
+		.textActive {
+			display: block;
+			animation: mymove ease 1 .31s
+		}
+
+		.hologram-btn {
+			display: inline-block;
+			padding: 1.5em 2.6em;
+			color: #6C7784;
+			font-weight: bold;
+			font-size: 15px;
+			letter-spacing: 1px;
+			text-decoration: none;
+			position: relative;
+			z-index: 500;
+			opacity: .8;
+			transition: all 250ms ease;
+			margin-left: 70px;
+			margin-top: 10px;
+			font-family: '微软雅黑';
+			transform: scale(.78)
+		}
+		.hologram-btn:hover{
+			cursor: pointer;
+		}
+
+		.hologram-btn:before,
+		.hologram-btn:after {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 200px;
+			height: 60px;
+			border: 2px solid;
+			-webkit-transition: .25s;
+			transition: .25s;
+		}
+
+		.hologram-btn:before{
+			transform: translateX(-0.25em) translateY(0.25em);
+		}
+
+		.hologram-btn:after {
+			transform: translateX(0.25em) translateY(-0.25em);
+		}
+
+		.hologram-btn:hover:before,
+		.hologram-btn:hover:after {
+			transform: translateX(0) translateY(0);
+		}
+
+		@keyframes mymove {
+			0% {
+				opacity: 0;
+				transform: scale(0.7);
+			}
+			100% {
+				opacity: 1;
+				transform: scale(1);
+			}
+		}
+		*::selection{
+			background: rgb(192, 187, 178)
+		}
+	</style>
+
+	<audio src="game.mp3" autoplay loop></audio>
+	<!-- 加载动画 -->
+	<div id="loader-wrapper">
+		<div id="loader" style="background: rgb(170, 160, 144);cursor: pointer;"></div>
+		<div class="loader-section section-left" style="background: rgb(184, 175, 158)"></div>
+		<div class="loader-section section-right" style="background:rgb(184, 175, 158)"></div>
+	</div>
+
+	<!-- 导航 -->
+	<nav class="nav">
+		<input type="checkbox" class="nav__cb" id="menu-cb">
+		<div class="nav__content">
+			<ul class="nav__items">
+				<li class="nav__item">
+					<a href="index.html">
+						<span class="nav__item-text">首页</span>
+					</a>
+				</li>
+				<li class="nav__item">
+					<a href="score.html">
+						<span class="nav__item-text">成绩</span>
+					</a>
+				</li>
+				<li class="nav__item">
+					<a href="page.html">
+						<span class="nav__item-text">战意</span>
+					</a>
+				</li>
+				<li class="nav__item">
+					<a href="game.html">
+						<span class="nav__item-text">游戏</span>
+					</a>
+				</li>
+				<!-- <li class="nav__item">
+					<a href="code.html">
+						<span class="nav__item-text">关于</span>
+					</a>
+				</li> -->
+			</ul>
+		</div>
+		<label class="nav__btn" for="menu-cb"></label>
+	</nav>
+	<link rel="stylesheet" href="nav.css">
+
+	<ul class="ability">
+		<li>刀盾合击之术最早出现在战国时期。魏国吴起手下的精锐部队就是“左执铁盾，右执刀剑，身被重铠”，战斗时，他们直接冲入敌阵砍杀；攻城时，他们首先登上扶梯。这种攻守兼备的配置，威力巨大。洪武二年朱元璋在南京设效义营，营内将士皆执刀盾，正逢北伐，他们一路披荆斩棘，素有“斩万军阵中之千敌，挡狼烟漫天之箭雨”
+			之称。名将戚继光更专为刀盾创“纪效八式”在军中推广，遂逐渐成为了明军中最常见的冷兵器。
+		</li>
+		<li>弓箭作为远射兵器，在春秋战国至宋代一直普遍应用，被列为兵器之首。射箭则为儒家推崇的“君子六艺”之一，备受尊崇。一直以来，长弓以其远距离的精准狙杀能力，深受名将喜爱，而含恨于弓箭之下的名将更是数不胜数。明朝开国大将常遇春其人便极为擅长射术，人称“小李广”，在率军攻占洛阳的战事中，元将帖木儿摆出“骑兵八阵”，明军屡攻不下，常遇春百步外重矢骤发，击毙阵中帖木儿，一举破敌。</li>
+		<li>长柄刀自西周起便装备了军队，至三国时已成为有数的装备，一直以来以势大力沉，劈砍威猛的特点，极受猛将的喜爱。明代白话小说《三国演义》中的武圣关羽，便是以一把“青龙偃月刀”斩无数敌酋，长柄刀因此也被俗称“关刀”。持关刀于战场威风凛凛，一刀可斩千敌。明代《续武经总要》中言:“十将九人执关刀，一刀三百六十斤。”夸张的表达不仅强调了关刀出击时惊心动魄的震撼，也可见其厚重之手感。</li>
+		<li>野太刀装备于古代日本的攻坚部队，活跃于镰仓末期至室町中期年代，著名剑豪佐佐木小次郎擅长使用的兵器，目前现存的流派以大太刀为主的主要有林崎梦想流的大太刀拔刀术、景流（阴流）野太刀术、古传圆心流大太刀组讨术和柳生新阴流奥传的大太刀术。佐佐木小次郎是日本著名剑豪，擅长使用野太刀，自创“岩流”一派，后自称“岩流小次郎”。由于野太刀剑身长度大，攻击范围大，小次郎剑术高超能够完美发挥出野太刀的威力。</li>
+		<li>随着中世纪板甲的出现和应用，为追求破甲而铸造的宽刃巨剑变得英雄无用武之地，毕竟人的臂力是有限的。当宽刃剑走投无路时，另一种设计思路却开始大行其道，将剑身打造的尽量窄而细长，以牺牲劈砍能力为代价获得更好的灵活性和穿刺能力。这种细刃剑的好处是使执剑者能够容易瞄准板甲接缝处和薄弱的颈、腋等关节部位下手，准确而致命地打击敌人。身着链板甲，手持精品手半剑以及盾牌，高贵而忠贞的剑盾武士成为了战场中不可忽视的力量。</li>
+		<li>
+		长柄战斧是欧洲战场上的重要兵器。随着重型板甲在战斗中的出现频率越来越高，对武器破甲能力的需求也就越来越强，因此沉重且杀伤力巨大的长柄战斧在战斗中的地位显得越加重要。长柄战斧一般有约2米长，战斧头部带有长刺用于刺击，厚实沉重的斧面赋予了其巨大的威力，柄尾部也有金属重物，可以用来造成极强的钝击伤害。武将手持巨大长柄战斧，身着重型板甲，其巨大的破坏力以及极强的防护效能成为了敌人的梦魇。
+		</li>
+		<li>大陆腹地的沙漠民族长久以来承担了交流东西方枢纽的作用，沙民们的武器也同时结合了东西方的特色。在见识过来自东方的枪术之后，沙民们自然而然地想到了对传统长矛的改进——为矛头加上更宽阔的刃，将矛杆从传统的一丈出头缩短至一丈以内，再在矛尾配上重物之后，原本只能用于冲锋和戳刺的长矛，变得灵动起来，可以适应近身格斗。</li>
+<a class="hologram-btn" href="http://z.163.com/jobs/?p=0&i=1">了解更多</a>
+	</ul>
+
+
+	<main>
+		<div class="content">
+			<div class="pieces-slider">
+				<div class="pieces-slider__slide">
+					<img class="pieces-slider__image" src="role/role_0_7_c0f1da5.png" alt="">
+					<h2 class="pieces-slider__text">刀盾武士</h2>
+				</div>
+				<div class="pieces-slider__slide">
+					<img class="pieces-slider__image" src="role/role_0_6_3515868.png" alt="">
+					<h2 class="pieces-slider__text">长弓武士</h2>
+				</div>
+				<div class="pieces-slider__slide">
+					<img class="pieces-slider__image" src="role/role_0_1_6ddf1fa.png" alt="">
+					<h2 class="pieces-slider__text">关刀武士</h2>
+				</div>
+				<div class="pieces-slider__slide">
+					<img class="pieces-slider__image" src="role/role_0_10_0362729.png" alt="">
+					<h2 class="pieces-slider__text">野太刀武士</h2>
+				</div>
+				<div class="pieces-slider__slide">
+					<img class="pieces-slider__image" src="role/role_0_11_02e111c.png" alt="">
+					<h2 class="pieces-slider__text">剑盾武士</h2>
+				</div>
+
+				<div class="pieces-slider__slide">
+					<img class="pieces-slider__image" src="role/role_0_12_835ffa1.png" alt="">
+					<h2 class="pieces-slider__text">战斧武士</h2>
+				</div>
+
+				<div class="pieces-slider__slide">
+					<img class="pieces-slider__image" src="role/role_0_13_7a47010.png" alt="">
+					<h2 class="pieces-slider__text">战矛武士</h2>
+				</div>
+
+				<canvas class="pieces-slider__canvas" width="1670" height="409" style="margin-left: 120px"></canvas>
+
+				<button class="pieces-slider__button pieces-slider__button--prev" id="btn1">Prev</button>
+				<button class="pieces-slider__button pieces-slider__button--next" id='btn2'>Next</button>
+			</div>
+		</div>
+	</main>
+	<script src="js/anime.min.js"></script>
+	<script src="js/pieces.min.js"></script>
+	<script src="js/demo.js"></script>
+</body>
+
+</html>
